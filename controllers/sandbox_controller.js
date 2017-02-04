@@ -5,8 +5,8 @@ module.exports = function (app) {
     // Get the root route
     app.get("/", function (req, res, next) {
         Promise.all([
-        db.Post.findAll({}),
-        db.User.findAll({})
+            db.Post.findAll({}),
+            db.User.findAll({})
         ]).then(function (result) {
             var posts = result[0];
             var users = result[1];
@@ -14,26 +14,26 @@ module.exports = function (app) {
                 posts: posts,
                 users: users
             });
-        }).catch(function (e) {console.log(e);});
-        // db.Post.findAll({}).then(function (result) {
-        //     console.log(result);
-        // });
-        // db.User.findAll({}).then(function (resultGroups) {
-        //     // Sends both data types to respective handlebars tags
-        //     return res.render("index", {
-        //         allGroups: resultGroups
-        //     });
-        // });
+        }).catch(function (e) {
+            console.log(e);
+        });
     });
     // Post for creating Ideas
     app.post('/', function (req, res) {
         var newPost = req.body;
         // Makes sure something is inputed
-        db.Post.create({
-            UserId: newPost.foofoo,
-            body: newPost.foo
-        }).then(function (result) {
+        Promise.all([
+            db.Post.create({
+                body: newPost.foo
+            })
+            // db.UserPost.create({
+            //     postId: newPost.asdfa,
+            //     userId: newPost.foofoo
+            // })
+        ]).then(function (result) {
             res.redirect('/');
+        }).catch(function (e) {
+            console.log(e);
         });
     });
     app.post('/user', function (req, res) {
@@ -44,5 +44,37 @@ module.exports = function (app) {
         }).then(function (result) {
             res.redirect('/user');
         });
+    });
+    app.post('/post/join', function (req, res) {
+        var newGroup = req.body;
+        // var idOfPost = req.params.id;
+        // Makes sure something is inputed
+        Promise.all([
+            db.Post.findAll({
+                where: {
+                    id: req.body.postId
+                }
+            }),
+            db.User.findAll({
+                where: {
+                    id: 1
+                }
+            })
+        ]).then(function(result){
+            var post = result[0];
+            var user = result[1];
+            console.log(result);
+            post.addPost(user, { through: {} }).then(function (result){
+                res.redirect('/post/join');
+            }).catch(function (err) {
+                console.log(err);
+            });
+        });
+        // .then(db.UserPost.add({
+        //     postId: newGroup.postId
+        // }).
+        // then(function (result) {
+        //     res.redirect('/post/join');
+        // }));
     });
 };

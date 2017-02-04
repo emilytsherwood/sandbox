@@ -13,8 +13,8 @@
           {{#each posts}}
           <p>
             {{id}}. {{body}}
-              <form action="/{{this.id}}?_method=PUT" method="POST">
-                <input type="hidden" name="id" value="{{this.id}}">
+              <form action="/post/join" method="POST">
+                <input type="hidden" name="postId" value="{{this.id}}">
                 <button type="submit" id="devour" margin="20px" class="btn btn-success">Join this idea</button>
               </form>
           </p>

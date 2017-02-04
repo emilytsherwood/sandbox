@@ -18,10 +18,10 @@ module.exports = function (sequelize, DataTypes) {
                 // When we delete an Author, we'll also delete their Posts "cascade"
                 // An Author (foreignKey) is required or a Post can't be made
                 // Post.belongsTo(models.User);
-                Post.belongsTo(models.User, {
-                    foreignKey: {
-                        allowNull: false
-                    }
+                Post.belongsToMany(models.User, {
+                    as: "content",
+                    through: "UserPost",
+                    foreignKey: "postId"
                 });
             }
         }
