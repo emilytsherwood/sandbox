@@ -1,0 +1,14 @@
+body {
+    font-family: 'Helvetica', cursive;
+    background: rgba(229, 229, 229, 0.4);
+}
+
+.main-banner {
+    background: rgba(229, 229, 229, 0.7);
+    padding: 20px;
+}
+
+.panel {
+    background: rgba(229, 229, 229, 0.7);
+}
+

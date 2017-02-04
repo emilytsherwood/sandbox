@@ -17,8 +17,12 @@ module.exports = function (sequelize, DataTypes) {
         classMethods: {
             associate: function (models) {
                 // Associating Author with Posts
-                User.belongsToMany(models.Post,
-                  {through: 'Groups'});
+                User.belongsTo(models.Group);
+                User.hasMany(models.Post, {
+                    foreignKey: {
+                        allowNull: false
+                    }
+                });
             }
         }
     }, {
