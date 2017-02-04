@@ -17,9 +17,12 @@ module.exports = function (sequelize, DataTypes) {
             associate: function (models) {
                 // When we delete an Author, we'll also delete their Posts "cascade"
                 // An Author (foreignKey) is required or a Post can't be made
-                Post.belongsTo(models.User);
+                // Post.belongsTo(models.User);
+                Post.hasOne(models.Group);
             }
         }
+    }, {
+      timestamps: true
     });
     return Post;
 };

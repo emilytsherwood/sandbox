@@ -12,14 +12,17 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 len: [2]
             }
-        },
+        }
     }, {
         classMethods: {
             associate: function (models) {
                 // Associating Author with Posts
-                User.hasMany(models.Post);
+                User.belongsToMany(models.Post,
+                  {through: 'Groups'});
             }
         }
+    }, {
+        timestamps: true
     });
     return User;
 };
