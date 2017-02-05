@@ -56,24 +56,25 @@ module.exports = function (app) {
             },
             include: [db.User]
         }).then(function (result) {
-            var post_data = result[0];
-            var user_data = result[1];
-            console.log("This is this for REAL: " + JSON.stringify(result.id));
+            var post_data = JSON.stringify(result.id);
+            // var user_data = JSON.stringify(result.id);
+            console.log("POST_DATA: " + JSON.stringify(post_data));
+            // console.log("USER_DATA: " + JSON.stringify(user_data));
             // user.addProject(project, { role: 'manager', transaction: t });
-            db.Post.setUser(db.User,{
-                id: result.id}
-            ).then(function (result) {
+            db.UserPost.create({
+                UserId: 1,
+                PostId: 5
+            }).then(function (result) {
                 res.redirect('/post/join');
             }).catch(function (err) {
                 console.log(err);
             });
-
-        // .then(db.UserPost.add({
-        //     postId: newGroup.postId
-        // }).
-        // then(function (result) {
-        //     res.redirect('/post/join');
-        // }));
-    });
+            // .then(db.UserPost.add({
+            //     postId: newGroup.postId
+            // }).
+            // then(function (result) {
+            //     res.redirect('/post/join');
+            // }));
+        });
     });
 };

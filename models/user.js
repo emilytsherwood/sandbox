@@ -12,7 +12,17 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 len: [2]
             }
-        }
+        },
+        createdAt: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+            },
+            updatedAt: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+            }
     }, {
         classMethods: {
             associate: function (models) {
@@ -36,7 +46,8 @@ module.exports = function (sequelize, DataTypes) {
                 });
             }
         }
-    }, {
+    },
+    {
         timestamps: true
     });
     return User;
