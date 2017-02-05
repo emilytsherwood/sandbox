@@ -49,32 +49,30 @@ module.exports = function (app) {
         var newGroup = req.body;
         // var idOfPost = req.params.id;
         // Makes sure something is inputed
-        Promise.all([
-            db.Post.findAll({
-                where: {
-                    id: req.body.postId
-                }
-            }),
-            db.User.findAll({
-                where: {
-                    id: 1
-                }
-            })
-        ]).then(function(result){
-            var post = result[0];
-            var user = result[1];
-            console.log(result);
-            post.addPost(user, { through: {} }).then(function (result){
+        db.Post.find({
+            where: {
+                id: 1
+            },
+            include: [db.User]
+        }).then(function (result) {
+            var post_data = result[0];
+            var user_data = result[1];
+            console.log("This is this for REAL: " + JSON.stringify(result.id));
+            // user.addProject(project, { role: 'manager', transaction: t });
+            db.Post.addUser(db.User,{
+                id: result.id}
+            ).then(function (result) {
                 res.redirect('/post/join');
             }).catch(function (err) {
                 console.log(err);
             });
-        });
+
         // .then(db.UserPost.add({
         //     postId: newGroup.postId
         // }).
         // then(function (result) {
         //     res.redirect('/post/join');
         // }));
+    });
     });
 };

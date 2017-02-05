@@ -12,16 +12,16 @@ module.exports = function (sequelize, DataTypes) {
             len: [2]
         }
     }, {
-        // We're saying that we want our Author to have Posts
         classMethods: {
             associate: function (models) {
-                // When we delete an Author, we'll also delete their Posts "cascade"
-                // An Author (foreignKey) is required or a Post can't be made
-                // Post.belongsTo(models.User);
                 Post.belongsToMany(models.User, {
-                    as: "content",
-                    through: "UserPost",
-                    foreignKey: "postId"
+                    // as: "content",
+                    through:
+                        models.UserPost
+
+
+                    // foreignKey: "postId",
+                    // constraints: false
                 });
             }
         }

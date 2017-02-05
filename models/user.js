@@ -23,9 +23,16 @@ module.exports = function (sequelize, DataTypes) {
                 //     }
                 // });
                 User.belongsToMany(models.Post, {
-                    as: "member",
-                    through: "UserPost",
-                    foreignKey: "userId"
+                    // as: "member",
+                    through:
+                        models.UserPost
+
+
+                    // foreignKey: {
+                    //     name: "userId",
+                    //     allowNull: false
+                    // },
+                    // constraints: false
                 });
             }
         }
