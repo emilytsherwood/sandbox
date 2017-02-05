@@ -15,8 +15,9 @@ module.exports = function (sequelize, DataTypes) {
                 UserPost.belongsTo(models.User, {
                     foreignKey: {
                         name: "groupId",
-                        allowNull: false
-                    }
+                        allowNull: true
+                    },
+                    constraint: false
                 });
             }
         }

@@ -24,7 +24,8 @@ module.exports = function (app) {
         // Makes sure something is inputed
         Promise.all([
             db.Post.create({
-                body: newPost.foo
+                body: newPost.foo,
+                userId: newPost.foofoo
             })
             // db.UserPost.create({
             //     postId: newPost.asdfa,
@@ -59,7 +60,7 @@ module.exports = function (app) {
             var user_data = result[1];
             console.log("This is this for REAL: " + JSON.stringify(result.id));
             // user.addProject(project, { role: 'manager', transaction: t });
-            db.Post.addUser(db.User,{
+            db.Post.setUser(db.User,{
                 id: result.id}
             ).then(function (result) {
                 res.redirect('/post/join');
