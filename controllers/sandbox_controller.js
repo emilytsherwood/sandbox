@@ -24,13 +24,8 @@ module.exports = function (app) {
         // Makes sure something is inputed
         Promise.all([
             db.Post.create({
-                body: newPost.foo,
-                userId: newPost.foofoo
+                body: newPost.foo
             })
-            // db.UserPost.create({
-            //     postId: newPost.asdfa,
-            //     userId: newPost.foofoo
-            // })
         ]).then(function (result) {
             res.redirect('/');
         }).catch(function (e) {
@@ -43,38 +38,27 @@ module.exports = function (app) {
         db.User.create({
             user_name: newUser.fooBar
         }).then(function (result) {
-            res.redirect('/user');
+            res.redirect('/');
         });
     });
-    app.post('/post/join', function (req, res) {
+
+    app.post('/post/join/:id', function (req, res) {
         var newGroup = req.body;
-        // var idOfPost = req.params.id;
-        // Makes sure something is inputed
+        var selectPost = req.params.id;
+        console.log("selectPost: " + selectPost);
         db.Post.find({
             where: {
-                id: 1
-            },
-            include: [db.User]
+                id: selectPost
+            }
         }).then(function (result) {
-            var post_data = JSON.stringify(result.id);
-            // var user_data = JSON.stringify(result.id);
-            console.log("POST_DATA: " + JSON.stringify(post_data));
-            // console.log("USER_DATA: " + JSON.stringify(user_data));
-            // user.addProject(project, { role: 'manager', transaction: t });
             db.UserPost.create({
-                UserId: 1,
-                PostId: 5
+                UserId: 2,
+                PostId: selectPost
             }).then(function (result) {
-                res.redirect('/post/join');
+                res.redirect('/');
             }).catch(function (err) {
                 console.log(err);
             });
-            // .then(db.UserPost.add({
-            //     postId: newGroup.postId
-            // }).
-            // then(function (result) {
-            //     res.redirect('/post/join');
-            // }));
         });
     });
 };
