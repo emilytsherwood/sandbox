@@ -40,12 +40,12 @@
               <div class="navbar-collapse collapse ">
                   <ul class="nav navbar-nav">
                       {{#if user}}
-                      <li class="active"><a href="/">Home</a></li> 
-                      <li><a href="/account">Account</a></li> 
-                      <li><a href="/logout">Log Out</a></li> 
+                      <li class="active"><a href="/">Home</a></li>
+                      <li><a href="/account">Account</a></li>
+                      <li><a href="/logout">Log Out</a></li>
                       {{else}}
-                      <li class="active"><a href="/">Home</a></li> 
-                      <li><a href="/login">Login</a></li> 
+                      <li class="active"><a href="/">Home</a></li>
+                      <li><a href="/login">Login</a></li>
                       <h4>Welcome! Please log in.</h4>
                       {{/if}}
                       {{msg}}
@@ -72,33 +72,33 @@
             <li>
               <img src="assets/img/slides/1.jpg" alt="" />
               <div class="flex-caption">
-                  <h3>Explore</h3> 
-        <p>Explore projects, join a team and begin! It's that simple.</p> 
-       
+                  <h3>Explore</h3>
+        <p>Explore projects, join a team and begin! It's that simple.</p>
+
               </div>
             </li>
             <li>
               <img src="assets/img/slides/2.jpg" alt="" />
               <div class="flex-caption">
-                  <h3>Innovate</h3> 
-        <p>Put your skills to work and build.</p> 
-        
+                  <h3>Innovate</h3>
+        <p>Put your skills to work and build.</p>
+
               </div>
             </li>
             <li>
               <img src="assets/img/slides/3.jpg" alt="" />
               <div class="flex-caption">
-                  <h3>Connect</h3> 
-        <p>Be part of a community passionate about web development.</p> 
-       
+                  <h3>Connect</h3>
+        <p>Be part of a community passionate about web development.</p>
+
               </div>
             </li>
           </ul>
-      </div> 
+      </div>
 <!-- end slider -->
     </div>
   </div>
-</div>   
+</div>
 </section>
 
 <!-- Second Header Section -->
@@ -126,7 +126,7 @@
                       <button type="submit" class="btn btn-success btn-block">Idea!</button>
                    </div>
                 </div>
-                
+
              </fieldset>
           </form>
        </div>
@@ -147,7 +147,7 @@
                 <p>
                    {{id}}. {{body}}
                    {{number}}
-                <form action="/post/join/{{this.id}}" method="POST" class="join">
+                <form action="/post/join" method="POST" class="join">
                    <input type="hidden" name="postId" value="{{this.id}}">
                    <div class="box-bottom">
                       <button type="submit" id="build" margin="20px" class="btn btn-success">Build this Idea</button>
@@ -242,8 +242,8 @@
           <div class="copyright">
             <p>&copy; Sandbox. All right reserved.</p>
                         <div class="credits">
-                            <!-- 
-                                All the links in the footer should remain intact. 
+                            <!--
+                                All the links in the footer should remain intact.
                                 You can delete the links only if you purchased the pro version.
                                 Licensing information: https://bootstrapmade.com/license/
                                 Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Moderna
@@ -296,9 +296,9 @@
               </p>
             {{else}}
               <p>
-              <a href="/">Home</a> | 
+              <a href="/">Home</a> |
               <a href="/login">Login</a> |
-              <h2>Welcome! Please log in.</h2>      
+              <h2>Welcome! Please log in.</h2>
               </p>
             {{/if}}
   </div>
