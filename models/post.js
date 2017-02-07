@@ -7,26 +7,35 @@ module.exports = function (sequelize, DataTypes) {
             primaryKey: true
         },
         body: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
             allowNull: false,
-            len: [2]
+            validate: {
+                len: [3-140]
+            }
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
         }
     }, {
-        // We're saying that we want our Author to have Posts
         classMethods: {
             associate: function (models) {
-                // When we delete an Author, we'll also delete their Posts "cascade"
-                // An Author (foreignKey) is required or a Post can't be made
-                // Post.belongsTo(models.User);
-                Post.belongsTo(models.User, {
-                    foreignKey: {
-                        allowNull: false
-                    }
+                Post.belongsToMany(models.User, {
+                    // as: "content",
+                    through: models.UserPost
+                        // foreignKey: "postId",
+                        // constraints: false
                 });
             }
         }
     }, {
-        timestamps: false
+        timestamps: true
     });
     return Post;
 };
