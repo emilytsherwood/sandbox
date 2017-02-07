@@ -6,13 +6,16 @@ module.exports = function (app) {
     app.get("/", function (req, res, next) {
         Promise.all([
             db.Post.findAll({}),
-            db.User.findAll({})
+            db.User.findAll({}),
+            db.UserPost.findAll({})
         ]).then(function (result) {
             var posts = result[0];
             var users = result[1];
+            var groups = result[2];
             res.render("index", {
                 posts: posts,
-                users: users
+                users: users,
+                groups: groups
             });
         }).catch(function (e) {
             console.log(e);
