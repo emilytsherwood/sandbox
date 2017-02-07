@@ -12,16 +12,34 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 len: [2]
             }
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
         }
     }, {
         classMethods: {
             associate: function (models) {
                 // Associating Author with Posts
-                User.belongsTo(models.Group);
-                User.hasMany(models.Post, {
-                    foreignKey: {
-                        allowNull: false
-                    }
+                // User.belongsTo(models.Group, {
+                //     foreignKey: {
+                //         allowNull: false
+                //     }
+                // });
+                User.belongsToMany(models.Post, {
+                    // as: "member",
+                    through: models.UserPost
+                        // foreignKey: {
+                        //     name: "userId",
+                        //     allowNull: false
+                        // },
+                        // constraints: false
                 });
             }
         }

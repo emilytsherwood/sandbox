@@ -5,18 +5,14 @@ var passport = require('passport');
 
 module.exports = function (app) {
     
-app.get('/', function(req, res){
-// console.log(req.user);
-  res.render('index', { user: req.user });
-});
 
 app.get('/login', function(req, res){
   res.render('login', { user: req.user });
 });
 
-// app.get('/account', ensureAuthenticated, function(req, res){
-//   res.render('account', { user: req.user });
-// });
+app.get('/account', ensureAuthenticated, function(req, res){
+  res.render('account', { user: req.user, email: req.user.emails[0].value});
+});
 
 // GET /auth/github
 //   Use passport.authenticate() as route middleware to authenticate the
