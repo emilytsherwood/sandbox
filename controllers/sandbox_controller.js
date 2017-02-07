@@ -22,7 +22,6 @@ module.exports = function (app) {
             console.log(e);
         });
     });
-
     app.get('/api/posts/:id?', function (req, res) {
         if (req.params.id) {
             db.Post.findOne({
@@ -39,7 +38,6 @@ module.exports = function (app) {
             });
         }
     });
-
     app.get('/api/users/:id?', function (req, res) {
         if (req.params.id) {
             db.User.findOne({
@@ -56,7 +54,6 @@ module.exports = function (app) {
             });
         }
     });
-
     app.get('/api/groups/:id?', function (req, res) {
         if (req.params.id) {
             db.UserPost.findOne({
@@ -73,7 +70,6 @@ module.exports = function (app) {
             });
         }
     });
-
     // Post for creating Ideas
     app.post('/add/', function (req, res) {
         var newPost = req.body;
@@ -97,24 +93,72 @@ module.exports = function (app) {
             res.redirect('/');
         });
     });
-
-    app.post('/post/join/:id', function (req, res) {
-        var newGroup = req.body;
-        var selectPost = req.params.id;
-        console.log("selectPost: " + selectPost);
-        db.Post.find({
+    app.post('/post/join', function (req, res) {
+        // check to see how many members are in this group
+        var selectPostId = req.body.postId;
+        db.UserPost.findAll({
             where: {
-                id: selectPost
+                postId: selectPostId
             }
         }).then(function (result) {
-            db.UserPost.create({
-                UserId: 1,
-                PostId: selectPost
-            }).then(function (result) {
-                res.redirect('/');
-            }).catch(function (err) {
-                console.log(err);
-            });
+            if (result.length > 0) {
+                Promise.all([
+                    db.Post.findAll({}),
+                    db.User.findAll({}),
+                    db.UserPost.findAll({})
+                ]).then(function (result) {
+                    res.render("index", {
+                        msg: "There are too many in this group!",
+                        posts: result[0] || [],
+                        users: result[1] || [],
+                        groups: result[2] || []
+                    });
+                });
+            } else {
+                console.log("selectPost: " + selectPostId);
+                db.Post.find({
+                    where: {
+                        id: selectPostId
+                    }
+                }).then(function (result) {
+                    db.UserPost.create({
+                        UserId: 1,
+                        PostId: selectPostId
+                    }).then(function (result) {
+                        res.redirect('/');
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+                });
+            }
         });
+        // var newGroup = req.body;
+        // var selectPost = req.params.id;
+        // console.log("selectPost: " + selectPost);
+        // db.Post.find({
+        //     where: {
+        //         id: selectPost
+        //     }
+        // }).then(function (result) {
+        //     db.UserPost.create({
+        //         UserId: 3,
+        //         PostId: selectPost
+        //     }).then(function (result) {
+        //         res.redirect('/');
+        //     }).catch(function (err) {
+        //         console.log(err);
+        //     });
+        // });
     });
+    // app.get('/', function (req, res) {
+    //     // Makes sure something is inputed
+    //     db.UserPost.findAll({
+    //         where: {
+    //             postId: 1
+    //         }
+    //     }).then(function (result) {
+    //         return res.json(result);
+    //     }
+    //     });
+    // });
 };

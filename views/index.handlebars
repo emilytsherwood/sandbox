@@ -18,6 +18,7 @@
                 <h2>Welcome! Please log in.</h2>      
                 </p>
               {{/if}}
+      {{msg}}
     </div>
   </div>
   <div class="row">
@@ -28,7 +29,7 @@
           {{#each posts}}
           <p>
             {{id}}. {{body}}
-              <form action="/post/join/{{this.id}}" method="POST" class="join">
+              <form action="/post/join" method="POST">
                 <input type="hidden" name="postId" value="{{this.id}}">
                 <button type="submit" id="devour" margin="20px" class="btn btn-success">Join this idea</button>
               </form>
@@ -113,15 +114,18 @@
   </div>
 </div>
 <script type="text/javascript">
-// $.get("/api/groups/", function(data) {
-//   var postIds = data[i].PostId
-//   // For each book that our server sends us back
-//   for (var i = 0; i < data.length; i++) {
-//     // Create a parent div to hold book data
-//     if (postIds === 6) {
-//       console.log(postIds);
-//       // .push
-//       }
-//     }
-// });
+
+/*$.get("/api/groups/", function(data) {
+  var postIds = data[i].PostId
+  // For each book that our server sends us back
+  for (var i = 0; i < data.length; i++) {
+    // Create a parent div to hold book data
+    if (postIds === 6) {
+      console.log(postIds);
+      // .push
+
+      }
+    }
+});*/
+
 </script>
