@@ -28,11 +28,14 @@
           {{#each posts}}
           <p>
             {{id}}. {{body}}
-              <form action="/post/join/{{this.id}}" method="POST">
+              <form action="/post/join/{{this.id}}" method="POST" class="join">
                 <input type="hidden" name="postId" value="{{this.id}}">
                 <button type="submit" id="devour" margin="20px" class="btn btn-success">Join this idea</button>
               </form>
           </p>
+          <div>
+            <span class="member"></span>
+          </div>
           {{/each}}
         </div>
       </div>
@@ -110,7 +113,6 @@
   </div>
 </div>
 <script type="text/javascript">
-
 // $.get("/api/groups/", function(data) {
 //   var postIds = data[i].PostId
 //   // For each book that our server sends us back
@@ -119,10 +121,7 @@
 //     if (postIds === 6) {
 //       console.log(postIds);
 //       // .push
-
 //       }
 //     }
 // });
-
 </script>
-
