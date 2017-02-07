@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="jumbotron main-banner">
+      <h1 class="text-center">Sandbox for Devs!</h1>
+      {{!-- <img src="" class="center-block" alt="burger" height="120"> --}}
+
+              <p>
+              <a href="/">Home</a> |
+              <a href="/account">Account</a> |
+              <a href="/logout">Log Out</a> |
+              <h2>Hello, {{user.displayName}}</h2>
+              </p>
+
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h2>Here is your account information.</h2></div>
+        <div class="panel-body">
+
+              <h3>ID: {{user.id}}</h4>
+              <h3>Username: {{user.username}}</h3>
+              <h3>Name: {{user.displayName}} </h3>
+              <h3>Email: {{email}}</h4>
+          
+        </div>
+      </div>
+    </div>
+    
+
+    
+  
+
+

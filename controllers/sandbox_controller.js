@@ -15,7 +15,8 @@ module.exports = function (app) {
             res.render("index", {
                 posts: posts,
                 users: users,
-                groups: groups
+                groups: groups,
+                user: req.user
             });
         }).catch(function (e) {
             console.log(e);

@@ -14,7 +14,7 @@
               {{else}}
                 <p>
                 <a href="/">Home</a> | 
-                <a href="/login">Login</a> |
+                <a href="/auth/github">Login with GitHub</a> |
                 <h2>Welcome! Please log in.</h2>      
                 </p>
               {{/if}}
@@ -28,8 +28,8 @@
           {{#each posts}}
           <p>
             {{id}}. {{body}}
-              <form action="/post/join/{{this.id}}" method="POST">
-                <input type="hidden" name="postId" value="{{this.id}}">
+              <form action="/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="id" value="{{this.id}}">
                 <button type="submit" id="devour" margin="20px" class="btn btn-success">Join this idea</button>
               </form>
           </p>
@@ -40,9 +40,14 @@
     <div class="col-sm-6 col-md-6 col-lg-6">
       <div class="panel panel-default">
         <div class="panel-body">
-          <form class="form-horizontal" method="POST" action="/add/" class="button-size">
+          <form class="form-horizontal" method="POST" action="/" class="button-size">
             <fieldset>
               <legend class="text-center col-xs-12">Write Idea</legend>
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <input placeholder="ID" type="text" name="foofoo" class="form-control" >
+                  </div>
+                </div>
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input placeholder="IDEA" type="text" name="foo" class="form-control" >
@@ -99,9 +104,9 @@
       <div class="panel panel-default">
         <div class="panel-heading">Groups</div>
         <div class="panel-body">
-          {{#each groups}}
+          {{#each allGroups}}
           <p>
-            Group:{{id}} Post#{{PostId}} User#{{UserId}}
+            {{id}}. {{PostId}}
           </p>
           {{/each}}
         </div>
@@ -109,20 +114,5 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
 
-// $.get("/api/groups/", function(data) {
-//   var postIds = data[i].PostId
-//   // For each book that our server sends us back
-//   for (var i = 0; i < data.length; i++) {
-//     // Create a parent div to hold book data
-//     if (postIds === 6) {
-//       console.log(postIds);
-//       // .push
-
-//       }
-//     }
-// });
-
-</script>
 
