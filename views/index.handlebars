@@ -13,12 +13,12 @@
           {{#each posts}}
           <p>
             {{id}}. {{body}}
-              <form action="/post/join/{{this.id}}" method="POST">
+              <form action="/post/join/{{this.id}}" method="POST" class="join">
                 <input type="hidden" name="postId" value="{{this.id}}">
                 <button type="submit" id="devour" margin="20px" class="btn btn-success">Join this idea</button>
               </form>
           </p>
-          <div class="join">
+          <div>
             <span class="member"></span>
           </div>
           {{/each}}
