@@ -18,6 +18,58 @@ module.exports = function (app) {
             console.log(e);
         });
     });
+
+    app.get('/api/posts/:id?', function (req, res) {
+        if (req.params.id) {
+            db.Post.findOne({
+                where: {
+                    id: req.params.id
+                }
+            }).then(function (result) {
+                return res.json(result);
+            });
+        } else {
+            // Otherwise display the data for all of the characters.
+            db.Post.findAll({}).then(function (result) {
+                return res.json(result);
+            });
+        }
+    });
+
+    app.get('/api/users/:id?', function (req, res) {
+        if (req.params.id) {
+            db.User.findOne({
+                where: {
+                    id: req.params.id
+                }
+            }).then(function (result) {
+                return res.json(result);
+            });
+        } else {
+            // Otherwise display the data for all of the characters.
+            db.User.findAll({}).then(function (result) {
+                return res.json(result);
+            });
+        }
+    });
+
+    app.get('/api/groups/:id?', function (req, res) {
+        if (req.params.id) {
+            db.UserPost.findOne({
+                where: {
+                    id: req.params.id
+                }
+            }).then(function (result) {
+                return res.json(result);
+            });
+        } else {
+            // Otherwise display the data for all of the characters.
+            db.UserPost.findAll({}).then(function (result) {
+                return res.json(result);
+            });
+        }
+    });
+
     // Post for creating Ideas
     app.post('/', function (req, res) {
         var newPost = req.body;
@@ -52,7 +104,7 @@ module.exports = function (app) {
             }
         }).then(function (result) {
             db.UserPost.create({
-                UserId: 2,
+                UserId: 1,
                 PostId: selectPost
             }).then(function (result) {
                 res.redirect('/');

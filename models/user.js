@@ -14,15 +14,15 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         createdAt: {
-                type: DataTypes.DATE,
-                allowNull: false,
-                defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
-            },
-            updatedAt: {
-                type: DataTypes.DATE,
-                allowNull: false,
-                defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
-            }
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        }
     }, {
         classMethods: {
             associate: function (models) {
@@ -34,20 +34,16 @@ module.exports = function (sequelize, DataTypes) {
                 // });
                 User.belongsToMany(models.Post, {
                     // as: "member",
-                    through:
-                        models.UserPost
-
-
-                    // foreignKey: {
-                    //     name: "userId",
-                    //     allowNull: false
-                    // },
-                    // constraints: false
+                    through: models.UserPost
+                        // foreignKey: {
+                        //     name: "userId",
+                        //     allowNull: false
+                        // },
+                        // constraints: false
                 });
             }
         }
-    },
-    {
+    }, {
         timestamps: true
     });
     return User;

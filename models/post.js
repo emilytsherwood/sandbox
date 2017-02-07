@@ -7,20 +7,22 @@ module.exports = function (sequelize, DataTypes) {
             primaryKey: true
         },
         body: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
             allowNull: false,
-            len: [2]
+            validate: {
+                len: [3-140]
+            }
         },
         createdAt: {
-                type: DataTypes.DATE,
-                allowNull: false,
-                defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
-            },
-            updatedAt: {
-                type: DataTypes.DATE,
-                allowNull: false,
-                defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
-            }
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        }
     }, {
         classMethods: {
             associate: function (models) {
