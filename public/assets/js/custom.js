@@ -2,6 +2,8 @@
 jQuery(document).ready(function($) {
 "use strict";
 
+
+
 	
 		//add some elements with animate effect
 
