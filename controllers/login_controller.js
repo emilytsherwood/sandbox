@@ -34,7 +34,27 @@ app.get('/auth/github',
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
+
+    var username = req.user._json.login;
+    var pictureUrl = req.user._json.avatar_url;
+    var email = req.user._json.email;
+
+    db.User.findOrCreate({
+      where: {user_name: username
+    }, defaults: {
+      picture_url: pictureUrl,
+      email: email
+    }})
+  .spread(function(user, created) {
+    console.log(user.get({
+      plain: true
+    }))
+    console.log(created)
+
     res.redirect('/');
+
+  })
+
   });
 
 app.get('/logout', function(req, res){
