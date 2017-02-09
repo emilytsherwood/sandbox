@@ -106,11 +106,12 @@
                            <div class="form-group">
                               <div class="col-xs-12">
                                  <input placeholder="IDEA" type="text" name="foo" class="form-control" >
+                                 <input placeholder="NUMBER" type="number" name="num" class="form-control">
                               </div>
                            </div>
                            <div class="form-group">
                               <div class="col-xs-12">
-                                 <button type="submit" class="btn btn-success btn-block">Idea!</button>
+                                 <button type="submit" class="btn btn-success">Idea!</button>
                               </div>
                            </div>
                         </fieldset>
@@ -119,6 +120,45 @@
                </div>
             </div>
       </section>
+<<<<<<< HEAD
+<!-- All Ideas Section -->
+<section id="content">
+   <!-- For each post, create a div col-lg-3 -->
+   {{#each posts}}
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="row">
+               <div class="col-lg-3">
+                  <p>
+                  <form action="/post/join" method="POST" class="join">
+                     <input type="hidden" name="postId" value="{{this.id}}">
+                     <div class="box-bottom">
+                        <button type="submit" id="build" margin="20px" class="btn btn-success">Build this Idea</button>
+                     </div>
+                  </form>
+                  </p>
+                  <div class="box">
+                     <div class="box-gray aligncenter">
+                        <div class="icon">
+                           {{id}}. {{body}}
+                           {{number}}
+                        </div>
+                        <!-- Adding avatars here -->
+                     </div>
+                  </div>
+               </div>
+               <div>
+                  <span class="member"></span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   {{/each}}
+</section>
+
+
       <!-- All Ideas Section -->
       <section id="content">
       <!-- For each post, create a div col-lg-3 -->
@@ -156,7 +196,8 @@
 {{/each}}
 </section>
 <!-- Group Section -->
-<section class="callaction">
+
+<!-- <section class="callaction">
    <div class="container">
       <div class="row">
          <div class="col-lg-12">
@@ -172,8 +213,10 @@
             {{/each}}
          </div>
       </div>
-   </div>
-</section>
+   </div> -->
+
+<!-- </section>  -->
+
 <!-- footer -->
 <footer>
    <div class="container">
@@ -258,10 +301,13 @@
 <script type="text/javascript">
    $(document).ready(function () {
        $('.carousel').carousel({
-           interval: 60
+
+           interval: 2500
        });
    
-       $('.carousel').carousel('cycle');
+       // $('.carousel').carousel('cycle');
+
+
    });
 </script>  
 </body>
