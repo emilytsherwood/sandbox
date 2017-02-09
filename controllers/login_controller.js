@@ -4,7 +4,7 @@ var db = require("../models");
 var passport = require('passport');
 
 module.exports = function (app) {
-    
+
 
 app.get('/login', function(req, res){
   res.render('login', { user: req.user });
@@ -31,7 +31,7 @@ app.get('/auth/github',
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function will be called,
 //   which, in this example, will redirect the user to the home page.
-app.get('/auth/github/callback', 
+app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
 
@@ -48,12 +48,12 @@ app.get('/auth/github/callback',
   .spread(function(user, created) {
     console.log(user.get({
       plain: true
-    }))
-    console.log(created)
+    }));
+    console.log(created);
 
     res.redirect('/');
 
-  })
+  });
 
   });
 

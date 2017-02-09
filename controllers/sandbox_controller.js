@@ -72,13 +72,28 @@ module.exports = function (app) {
     });
     // Post for creating Ideas
     app.post('/add/', function (req, res) {
-        var newPost = req.body;
         // Makes sure something is inputed
         Promise.all([
             db.Post.create({
                 body: newPost.foo
             })
         ]).then(function (result) {
+            console.log("HEY_______________________: " + JSON.stringify(result[0].id));
+            Promise.all([
+                db.Post.findAll({
+                    where: {
+                        id: result[0].id
+                    }
+                }),
+                db.User.findAll({})
+            ]).then(function (result) {
+                console.log("RESULT: " + JSON.stringify(result) + "UserID: " + result[1][0].id + "PostId: " + result[0][0].id);
+                db.UserPost.create({
+                    UserId: result[1][0].id,
+                    PostId: result[0][0].id
+                });
+            });
+        }).then(function (result) {
             res.redirect('/');
         }).catch(function (e) {
             console.log(e);
@@ -124,7 +139,6 @@ module.exports = function (app) {
                     }),
                     db.User.findAll({})
                 ]).then(function (result) {
-                    console.log("RESULT: " + JSON.stringify(result) + result[1][0].id);
                     db.UserPost.create({
                         UserId: result[1][0].id,
                         PostId: selectPostId
