@@ -116,13 +116,17 @@ module.exports = function (app) {
                 });
             } else {
                 console.log("selectPost: " + selectPostId);
-                db.Post.find({
-                    where: {
-                        id: selectPostId
-                    }
-                }).then(function (result) {
+                Promise.all([
+                    db.Post.find({
+                        where: {
+                            id: selectPostId
+                        }
+                    }),
+                    db.User.findAll({})
+                ]).then(function (result) {
+                    console.log("RESULT: " + JSON.stringify(result) + result[1][0].id);
                     db.UserPost.create({
-                        UserId: 1,
+                        UserId: result[1][0].id,
                         PostId: selectPostId
                     }).then(function (result) {
                         res.redirect('/');

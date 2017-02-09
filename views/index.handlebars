@@ -120,6 +120,7 @@
                </div>
             </div>
       </section>
+<<<<<<< HEAD
 <!-- All Ideas Section -->
 <section id="content">
    <!-- For each post, create a div col-lg-3 -->
@@ -157,6 +158,45 @@
    {{/each}}
 </section>
 <!-- Group Section 
+=======
+      <!-- All Ideas Section -->
+      <section id="content">
+      <!-- For each post, create a div col-lg-3 -->
+      {{#each posts}}
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-3">
+            <p>
+              <form action="/post/join" method="POST" class="join">
+                <input type="hidden" name="postId" value="{{this.id}}">
+          <div class="box-bottom">
+                <button type="submit" id="build" margin="20px" class="btn btn-success">Build this Idea</button>
+          </div>
+              </form>
+            </p>
+        <div class="box">
+          <div class="box-gray aligncenter">
+            <div class="icon">
+              {{id}}. {{body}}
+              {{number}}
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+ <!-- Adding avatars here -->
+<div>
+   <span class="member"></span>
+</div>
+</div>
+</div>
+</div>
+{{/each}}
+</section>
+<!-- Group Section -->
+>>>>>>> master
 <section class="callaction">
    <div class="container">
       <div class="row">
@@ -174,7 +214,11 @@
          </div>
       </div>
    </div>
+<<<<<<< HEAD
 </section> -->
+=======
+</section>
+>>>>>>> master
 <!-- footer -->
 <footer>
    <div class="container">
@@ -259,10 +303,17 @@
 <script type="text/javascript">
    $(document).ready(function () {
        $('.carousel').carousel({
+<<<<<<< HEAD
            interval: 2500
        });
    
        // $('.carousel').carousel('cycle');
+=======
+           interval: 60
+       });
+   
+       $('.carousel').carousel('cycle');
+>>>>>>> master
    });
 </script>  
 </body>
