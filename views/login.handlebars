@@ -42,18 +42,36 @@
   </section>
 
 
-<!-- <script src="js/jquery.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.fancybox.pack.js"></script>
-<script src="js/jquery.fancybox-media.js"></script>
-<script src="js/google-code-prettify/prettify.js"></script>
-<script src="js/portfolio/jquery.quicksand.js"></script>
-<script src="js/portfolio/setting.js"></script>
-<script src="js/jquery.flexslider.js"></script>
-<script src="https://maps.google.com/maps/api/js?sensor=true"></script>
-<script src="js/animate.js"></script>
-<script src="js/custom.js"></script> -->
+
+<section id="content">
+  <div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-lg-offset-1">
+        <div class="pricing-box-alt">
+          <div class="pricing-heading">
+            <h3><strong>Explore.</strong></h3>
+          </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+        <div class="pricing-box-alt">
+          <div class="pricing-heading">
+            <h3><strong>Innovate.</strong></h3>
+          </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+        <div class="pricing-box-alt">
+          <div class="pricing-heading">
+            <h3><strong>Connect.</strong></h3>
+          </div>
+    </div>
+  </div>
+  </div>
+</section>
+
 
 </body> 
 
@@ -61,122 +79,5 @@
 
 
 
-<!-- 
-<div class="container">
-  <div class="row">
-    <div class="jumbotron main-banner">
-      <h1 class="text-center">Sandbox for Devs!</h1>
-      {{!<img src="" class="center-block" alt="burger" height="120"> }}
-
-              {{#if user}}
-                <p>
-                <a href="/">Home</a> |
-                <a href="/account">Account</a> |
-                <a href="/logout">Log Out</a> |
-                <h2>Hello, {{user.displayName}}</h2>
-                </p>
-              {{else}}
-                <p>
-                <a href="/">Home</a> | 
-                <a href="/auth/github">Login with GitHub</a> |
-                <h2>Welcome! Please log in.</h2>      
-                </p>
-              {{/if}}
-    </div>
-  </div> -->
-<!--   <div class="row">
-    <div class="col-sm-6 col-md-6 col-lg-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">Ideas</div>
-        <div class="panel-body">
-          {{#each posts}}
-          <p>
-            {{id}}. {{body}}
-              <form action="/{{this.id}}?_method=PUT" method="POST">
-                <input type="hidden" name="id" value="{{this.id}}">
-                <button type="submit" id="devour" margin="20px" class="btn btn-success">Join this idea</button>
-              </form>
-          </p>
-          {{/each}}
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-6 col-lg-6">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <form class="form-horizontal" method="POST" action="/" class="button-size">
-            <fieldset>
-              <legend class="text-center col-xs-12">Write Idea</legend>
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <input placeholder="ID" type="text" name="foofoo" class="form-control" >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <input placeholder="IDEA" type="text" name="foo" class="form-control" >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <button type="submit" class="btn btn-success btn-block">Idea!</button>
-                  </div>
-                </div>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6 col-md-6 col-lg-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">Users</div>
-        <div class="panel-body">
-          {{#each users}}
-          <p>
-            {{id}}. {{user_name}}
-          </p>
-          {{/each}}
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 col-md-6 col-lg-6">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <form class="form-horizontal" method="POST" action="/user" class="button-size">
-            <fieldset>
-              <legend class="text-center col-xs-12">Create a Profile</legend>
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <input type="text" name="fooBar" class="form-control" >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <button type="submit" class="btn btn-success btn-block">User!</button>
-                  </div>
-                </div>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-  <div class="col-sm-6 col-md-6 col-lg-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">Groups</div>
-        <div class="panel-body">
-          {{#each allGroups}}
-          <p>
-            {{id}}. {{PostId}}
-          </p>
-          {{/each}}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>  -->
 
 
