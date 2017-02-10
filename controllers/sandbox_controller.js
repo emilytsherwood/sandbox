@@ -72,6 +72,7 @@ module.exports = function (app) {
     });
     // Post for creating Ideas
     app.post('/add/', function (req, res) {
+        var newPost = req.body;
         // Makes sure something is inputed
         Promise.all([
             db.Post.create({
