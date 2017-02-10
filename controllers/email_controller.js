@@ -6,8 +6,11 @@ var express = require('express');
 var key = require('../keys.js');
 module.exports = function (app) {
     app.post('/send', function (req, res, next) {
-    console.log("YOOOOOOOO: " + req.body.email);
-
+        // db.UserPost.findOne({
+        //     where: {
+        //         : req.body.email
+        //     }
+        // });
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
