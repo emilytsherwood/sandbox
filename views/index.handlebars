@@ -67,22 +67,22 @@
                <div class="item active">
                   <img src="assets/img/slides/1.jpg" width="100%" alt="">
                   <div class="flex-caption">
-                    <h3>EXPLORE</h3> 
-                    <p>Explore projects, join a team and begin! It's that simple.</p> 
+                    <h3>EXPLORE</h3>
+                    <p>Explore projects, join a team and begin! It's that simple.</p>
                   </div>
                </div>
                <div class="item">
                   <img src="assets/img/slides/2.jpg" width="100%" alt="">
                   <div class="flex-caption">
-                    <h3>INNOVATE</h3> 
-                    <p>Put your skills to work and start building!</p> 
+                    <h3>INNOVATE</h3>
+                    <p>Put your skills to work and start building!</p>
                   </div>
                </div>
                <div class="item">
                   <img src="assets/img/slides/3.jpg" width="100%" alt="">
                   <div class="flex-caption">
-                    <h3>CONNECT</h3> 
-                    <p>Be part of a community passionate about web development.</p> 
+                    <h3>CONNECT</h3>
+                    <p>Be part of a community passionate about web development.</p>
                   </div>
                </div>
             </div>
@@ -138,6 +138,12 @@
                         <button type="submit" id="build" margin="20px" class="btn btn-success">Build this Idea</button>
                      </div>
                   </form>
+                  <form action="/send" method="POST">
+                     <input type="hidden" name="email" value="{{this.body}}">
+                     <div class="box-bottom">
+                        <button type="submit" id="build" margin="20px" class="btn btn-success">Send an Email</button>
+                     </div>
+                  </form>
                   </p>
                   <div class="box">
                      <div class="box-gray aligncenter">
@@ -172,7 +178,7 @@
                <address>
                   <strong>Sandbox Inc.</strong><br>
                   9006 West Corner Avenue, Suite 501<br>
-                  Someplace 16425 Earth 
+                  Someplace 16425 Earth
                </address>
                <p>
                   <i class="icon-phone"></i> (605) 871-2222 <br>
@@ -253,7 +259,7 @@
 
        // $('.carousel').carousel('cycle');
 
-</script>  
+</script>
 </body>
 </html>
 

@@ -42,7 +42,7 @@ passport.use(new GitHubStrategy({
   function(accessToken, refreshToken, profile, done) {
 
     process.nextTick(function () {
-      
+
       return done(null, profile);
     });
   }
@@ -83,7 +83,9 @@ var sandboxRoutes = require("./controllers/sandbox_controller.js")(app);
 
 var loginRoutes = require("./controllers/login_controller.js")(app);
 
-//syncing database and listening 
+var emailRoutes = require("./controllers/email_controller.js")(app);
+
+//syncing database and listening
 db.sequelize.sync().then(function() {
     app.listen(PORT, function () {
 console.log("App listening this awesome PORT: " + PORT);
