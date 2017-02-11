@@ -1,7 +1,7 @@
 function showImage() {
 	$('.join').on('click', function(){
-        var newMember = "<span class='member'><img src='/assets/img/person.svg'></span>";
-		$('.members').after(newMember);
+        var newMember = "<li class='member'><img src='/assets/img/person.svg'></li>";
+		$(this).next('.members').after(newMember);
 	});
     
 }

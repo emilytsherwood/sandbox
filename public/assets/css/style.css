@@ -1795,12 +1795,13 @@ article img.pull-right, article .align-right{
 .members {
     max-height: 30px;
 }
+.members li {
+    float: left;
+}
 .member img {
     max-height: 30px;
 }
-.member {
-    float: left;
-}
+
 /* =============================
 21. Media queries 
 ============================= */
