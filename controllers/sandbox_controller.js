@@ -1,5 +1,20 @@
 // Require functions from the models folder (index.js and burger.js)
 var db = require("../models");
+var passport = require('passport');
+var loginBool = require("./login_controller");
+const nodemailer = require('nodemailer');
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'jkbuoyant@gmail.com',
+        pass: 'ayew4ssupBruh!'
+    }
+});
+
+
+
+
 // Export these awesome routes
 module.exports = function (app) {
     // Get the root route
@@ -72,34 +87,64 @@ module.exports = function (app) {
     });
     // Post for creating Ideas
     app.post('/add/', function (req, res) {
-        var newPost = req.body;
-        // Makes sure something is inputed
-        Promise.all([
-            db.Post.create({
-                body: newPost.foo
-            })
-        ]).then(function (result) {
-            console.log("HEY_______________________: " + JSON.stringify(result[0].id));
+
+        if(loginBool.loggedIn===false){
             Promise.all([
-                db.Post.findAll({
-                    where: {
-                        id: result[0].id
-                    }
-                }),
-                db.User.findAll({})
-            ]).then(function (result) {
-                console.log("RESULT: " + JSON.stringify(result) + "UserID: " + result[1][0].id + "PostId: " + result[0][0].id);
-                db.UserPost.create({
-                    UserId: result[1][0].id,
-                    PostId: result[0][0].id
+                    db.Post.findAll({}),
+                    db.User.findAll({}),
+                    db.UserPost.findAll({})
+                ]).then(function (result) {
+                    res.render("pleaseLoginModal", {
+                        posts: result[0] || [],
+                        users: result[1] || [],
+                        groups: result[2] || []
+                    });
                 });
-            });
-        }).then(function (result) {
-            res.redirect('/');
-        }).catch(function (e) {
-            console.log(e);
-        });
+        }
+
+        else{
+            var newPost = req.body;
+            console.log("POSTBOY "+JSON.stringify(newPost));
+
+            if (typeof localStorage === "undefined" || localStorage === null) {
+              var LocalStorage = require('node-localstorage').LocalStorage;
+              localStorage = new LocalStorage('./scratch');
+            }
+
+            var currentUser = localStorage.getItem('currentUser');
+            // Makes sure something is inputed
+            Promise.all([
+                    db.User.find({
+                        where: {
+                            email: currentUser
+                        }
+                    })
+                ]).then(function (result) {
+                    console.log("RESULT: " + JSON.stringify(result));
+                    db.Post.create({
+                        authorEmail: result[0]['email'],
+                        groupLimit: newPost['groupLimit'],
+                        body: newPost['body']
+                    }).then(function (result) {
+                        res.redirect('/');
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+                });
+
+            // Promise.all([
+            //     db.Post.create({
+            //         groupLimit: newPost.groupLimit,
+            //         body: newPost.body
+            //     })
+            // ]).then(function (result) {
+            //     res.redirect('/');
+            // }).catch(function (e) {
+            //     console.log(e);
+            // });
+        }
     });
+
     app.post('/user', function (req, res) {
         var newUser = req.body;
         // Makes sure something is inputed
@@ -110,47 +155,121 @@ module.exports = function (app) {
         });
     });
     app.post('/post/join', function (req, res) {
-        // check to see how many members are in this group
-        var selectPostId = req.body.postId;
-        db.UserPost.findAll({
-            where: {
-                postId: selectPostId
-            }
-        }).then(function (result) {
-            if (result.length > 0) {
-                Promise.all([
+
+        if(loginBool.loggedIn===false){
+            Promise.all([
                     db.Post.findAll({}),
                     db.User.findAll({}),
                     db.UserPost.findAll({})
                 ]).then(function (result) {
-                    res.render("index", {
-                        msg: "There are too many in this group!",
+                    res.render("pleaseLoginModal", {
                         posts: result[0] || [],
                         users: result[1] || [],
                         groups: result[2] || []
                     });
                 });
-            } else {
-                console.log("selectPost: " + selectPostId);
-                Promise.all([
-                    db.Post.find({
-                        where: {
-                            id: selectPostId
-                        }
-                    }),
-                    db.User.findAll({})
-                ]).then(function (result) {
-                    db.UserPost.create({
-                        UserId: result[1][0].id,
-                        PostId: selectPostId
-                    }).then(function (result) {
-                        res.redirect('/');
-                    }).catch(function (err) {
-                        console.log(err);
-                    });
-                });
+        }
+
+        else {
+
+            if (typeof localStorage === "undefined" || localStorage === null) {
+              var LocalStorage = require('node-localstorage').LocalStorage;
+              localStorage = new LocalStorage('./scratch');
             }
-        });
+
+            var currentUser = localStorage.getItem('currentUser');
+
+            var selectPostId = req.body.postId;
+            var selectGroupLimit = req.body.groupLimit;
+
+            db.UserPost.findAll({
+                where: {
+                    postId: selectPostId
+                }
+            }).then(function (result) {
+
+                if (result.length >= selectGroupLimit) {
+                    Promise.all([
+                        db.Post.findAll({}),
+                        db.User.findAll({}),
+                        db.UserPost.findAll({})
+                    ]).then(function (result) {
+                        res.render("groupIsFull", {
+                            posts: result[0] || [],
+                            users: result[1] || [],
+                            groups: result[2] || []
+                        });
+                    });
+                } else {
+                    console.log("selectPost: " + selectPostId);
+                    Promise.all([
+                        db.Post.find({
+                            where: {
+                                id: selectPostId
+                            }
+                        }),
+                        db.User.find({
+                            where: {
+                                email: currentUser
+                            }
+                        })
+                    ]).then(function (result) {
+                        // console.log("RESULT: " + JSON.stringify(result[1]['id']));
+                        db.UserPost.create({
+                            userEmail: result[1]['email'],
+                            UserId: result[1]['id'],
+                            PostId: selectPostId
+                        }).then(function (result) {
+                            db.UserPost.findAll({
+                                where: {
+                                    postId: selectPostId
+                                }
+                            }).then(function (result) {
+                                
+                                var listOfEmails="";
+
+                                for (var i = 0; i < result.length; i++) {
+                                    var recipient = result[i]['userEmail'] + ', ';
+                                    listOfEmails = listOfEmails.concat(recipient);
+                                }
+
+                                listOfEmails = listOfEmails.slice(0, (listOfEmails.length - 2))
+                                
+                               if (result.length == selectGroupLimit) {
+                                    // setup email data with unicode symbols
+                                    let mailOptions = {
+                                        from: '"SandBox Team 👻" <jkbuoyant@gmail.com>', // sender address
+                                        to: listOfEmails, // list of receivers
+                                        subject: 'SANDBOX COLLOBORATION!', // Subject line
+                                        text: 'Hi! Let\'s work together!', // plain text body
+                                        html: '<b>Hi! Let\'s work together!</b>' // html body
+                                    };
+
+                                    transporter.sendMail(mailOptions, (error, info) => {
+                                        if (error) {
+                                            return console.log(error);
+                                        }
+                                        console.log('Message %s sent: %s', info.messageId, info.response);
+                                    });
+
+                                    db.Post.destroy({
+                                        where: {
+                                            id: selectPostId
+                                        }
+                                    })
+                               } 
+
+                            });
+
+                            res.redirect('/');
+
+                        }).catch(function (err) {
+                            console.log(err);
+                        });
+                    });
+                }
+            });
+        }
         // var newGroup = req.body;
         // var selectPost = req.params.id;
         // console.log("selectPost: " + selectPost);
