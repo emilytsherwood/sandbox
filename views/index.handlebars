@@ -39,11 +39,13 @@
                      {{#if user}}
                      <li class="active"><a href="/">Home</a></li>
                      <li><a href="/account">Account</a></li>
+                     <li><a href="/past">Past Projects</a></li>
                      <li><a href="/logout">Log Out</a></li>
                      <h4>Hello, {{user.displayName}}</h4>
                      {{else}}
                      <li class="active"><a href="/">Home</a></li>
-                     <li><a href="/auth/github/callback">Login With Gihub</a></li>
+                     <li><a href="/past">Past Projects</a></li>
+                     <li><a href="/auth/github/callback">Login With Github</a></li>
                      <h4>Welcome! Please log in.</h4>
                      {{/if}}
                      {{msg}}
@@ -133,11 +135,13 @@
          <div class="col-lg-12">
             <div class="row">
             {{#each posts}}
+            {{#unless capacity}}
                <div class="col-lg-3">
                   <p>
                   <form action="/post/join" method="POST" class="join">
                      <input type="hidden" name="postId" value="{{this.id}}">
                      <input type="hidden" name="groupLimit" value="{{this.groupLimit}}">
+                     <input type="hidden" name="capacity" value="false">
                      <div class="box-bottom">
                         <button type="submit" id="build" margin="20px" class="btn btn-success">Build this Idea</button>
                      </div>
@@ -155,20 +159,15 @@
                     </ul>
                   </div>
                </div>
-
+               {{/unless}}
                {{/each}}
             </div>
          </div>
       </div>
    </div>
 </section>
- <!-- Adding avatars here -->
-<!-- <div>
-   <span class="member"></span>
-</div>
-</div>
-</div>
-<!-footer -->
+
+<!-- footer -->
 <footer>
    <div class="container">
       <div class="row">
@@ -243,14 +242,14 @@
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 <!-- Placed at the end of the document so the pages load faster -->
 
-<script src="assets/js/jquery.js"></script>
-<script src="assets/js/jquery.easing.1.3.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/google-code-prettify/prettify.js"></script>
-<script src="assets/js/jquery.flexslider.js"></script>
-<script src="assets/js/animate.js"></script>
-<script src="assets/js/custom.js"></script>
-<script src="assets/js/join.js"></script>
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.easing.1.3.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/google-code-prettify/prettify.js"></script>
+<script src="/assets/js/jquery.flexslider.js"></script>
+<script src="/assets/js/animate.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/join.js"></script>
 
 
 <script type="text/javascript">

@@ -15,10 +15,12 @@
                      {{#if user}}
                      <li><a href="/">Home</a></li>
                      <li class="active"><a href="/account">Account</a></li>
+                     <li><a href="#">Past Projects</a></li>
                      <li><a href="/logout">Log Out</a></li>
                      <h4>Hello, {{user.displayName}}</h4>
                      {{else}}
                      <li><a href="/">Home</a></li>
+                     <li><a href="#">Past Projects</a></li>
                      <li><a href="/auth/github">Login with Github</a></li>
                      {{/if}}
                      {{msg}}
@@ -71,20 +73,7 @@
       </section>
       </center>
 
-<!--   <div class="row">
-    <div class="col-sm-12">
-      <div class="panel panel-default">
-        <div class="panel-heading"><h2>Here is your account information.</h2></div>
-        <div class="panel-body">
 
-              <h3>ID: {{user.id}}</h4>
-              <h3>Username: {{user.username}}</h3>
-              <h3>Name: {{user.displayName}} </h3>
-              <h3>Email: {{email}}</h4>
-
-        </div>
-      </div>
-    </div> -->
 
 
 

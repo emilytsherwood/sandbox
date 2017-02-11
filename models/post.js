@@ -17,6 +17,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        capacity: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
         authorEmail: {
             type: DataTypes.STRING,
             allowNull: false,
