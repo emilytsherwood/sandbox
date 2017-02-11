@@ -128,7 +128,9 @@ module.exports = function (app) {
                         db.Post.create({
                             authorEmail: result[0]['email'],
                             groupLimit: newPost['groupLimit'],
-                            body: newPost['body']
+                            body: newPost['body'],
+                            pictureUrl: result[0]['picture_url'],
+                            user: result[0]['user_name']
                         }).then(function (result) {
                             res.redirect('/');
                         }).catch(function (err) {
