@@ -244,19 +244,19 @@
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 
 <!-- Modal -->
-<div class="modal fade" id="emptyInput" tabindex="-1" role="dialog" aria-labelledby="fullGroup" aria-hidden="true">
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="fullGroup" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <center><h3 class="modal-title" id="fullGroup">Oops!</h3></center>
+        <center><h3 class="modal-title" id="fullGroup">Confirm</h3></center>
       </div>
       <div class="modal-body">
-      <center><h5>Please enter something!</h5></center>
+      <center><h5>No going back! Are you sure you want to join?</h5></center>
       </div>
       <div class="modal-footer">
 
         <form class="form-horizontal" method="GET" action="/" class="button-size">
-            <center><button type="submit" class="btn btn-success">Got it!</button></center>
+            <center><button type="submit" class="btn btn-success">Join!</button></center>
         </form>
       </div>
     </div>
@@ -284,4 +284,3 @@
 </script>
 </body>
 </html>
-

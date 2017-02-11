@@ -135,11 +135,13 @@
          <div class="col-lg-12">
             <div class="row">
             {{#each posts}}
+            {{#unless capacity}}
                <div class="col-lg-3">
                   <p>
                   <form action="/post/join" method="POST" class="join">
                      <input type="hidden" name="postId" value="{{this.id}}">
                      <input type="hidden" name="groupLimit" value="{{this.groupLimit}}">
+                     <input type="hidden" name="capacity" value="false">
                      <div class="box-bottom">
                         <button type="submit" id="build" margin="20px" class="btn btn-success">Build this Idea</button>
                      </div>
@@ -155,6 +157,7 @@
                   </div>
                </div>
                {{/each}}
+               {{/unless}}
             </div>
          </div>
       </div>
