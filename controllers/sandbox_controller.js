@@ -228,16 +228,24 @@ module.exports = function (app) {
                         })
                     ]).then(function (result) {
                         // console.log("RESULT: " + JSON.stringify(result[1]['id']));
-                        db.UserPost.create({
-                            userEmail: result[1]['email'],
-                            UserId: result[1]['id'],
-                            PostId: selectPostId
-                        }).then(function (result) {
+                        db.UserPost.findOrCreate({
+                            where: {
+                                userEmail: result[1]['email'],
+                                UserId: result[1]['id'],
+                                PostId: selectPostId
+                        }, defaults: {
+                                userEmail: result[1]['email'],
+                                UserId: result[1]['id'],
+                                PostId: selectPostId
+                        }})
+                        .then(function (result) {
                             db.UserPost.findAll({
                                 where: {
                                     postId: selectPostId
                                 }
                             }).then(function (result) {
+
+                               if (result.length == selectGroupLimit) {
 
                                 var listOfEmails="";
 
@@ -248,7 +256,6 @@ module.exports = function (app) {
 
                                 listOfEmails = listOfEmails.slice(0, (listOfEmails.length - 2))
 
-                               if (result.length == selectGroupLimit) {
                                     // setup email data with unicode symbols
                                     let mailOptions = {
                                         from: '"SandBox Team 👻" <jkbuoyant@gmail.com>', // sender address
@@ -265,20 +272,32 @@ module.exports = function (app) {
                                         console.log('Message %s sent: %s', info.messageId, info.response);
                                     });
 
-                                    db.Post.update({
-                                            capacity: true
-                                        }, {                                     
-                                            where: {
-                                                id: selectPostId
-                                            }
-                                        });
+                                    res.redirect('/');    
 
-                                    
+                               }
+
+                               else{
+                                    Promise.all([
+                                        db.Post.findAll({}),
+                                        db.User.findAll({}),
+                                        db.UserPost.findAll({})
+                                    ]).then(function (result) {
+                                        var posts = result[0];
+                                        var users = result[1];
+                                        var groups = result[2];
+                                        res.render("cantJoinModal", {
+                                            posts: posts,
+                                            users: users,
+                                            groups: groups,
+                                            user: req.user
+                                        });
+                                    }).catch(function (e) {
+                                        console.log(e);
+                                    });
                                }
 
                             });
 
-                            res.redirect('/');
 
                         }).catch(function (err) {
                             console.log(err);
