@@ -13,6 +13,20 @@ module.exports = function (sequelize, DataTypes) {
                 len: [2]
             }
         },
+        picture_url: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [2]
+            }
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [2]
+            }
+        },
         createdAt: {
             type: DataTypes.DATE,
             allowNull: false,
