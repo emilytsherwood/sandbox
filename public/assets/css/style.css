@@ -45,6 +45,27 @@ h1,h2, h3, h4, h5, h6 {
 	margin-bottom: 20px;
 }
 
+/*AVATARS ===========================*/
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.members {
+    max-height: 30px;
+    position: relative;
+}
+.member img {
+    max-height: 30px;
+}
+.members span {
+    position: relative;
+    float: left;
+}
+    
+
 /* ===================================
 2. layout
 ==================================== */
@@ -1988,21 +2009,6 @@ article img.pull-right, article .align-right{
 
 @media (max-width: 360px) {
 
-    ul {
-        list-style: none;
-    }
-
-    .members {
-        max-height: 30px;
-
-    }
-    .members li {
-        float: left;
-    }
-    .member img {
-        max-height: 30px;
-    }
-    
 }
 
 
