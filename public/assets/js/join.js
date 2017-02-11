@@ -1,14 +1,12 @@
-function showImage() {
-	$('.join').on('click', function(){
+$(document).ready(function(){
+    $('.join').on('click', function(event){
+        event.preventDefault();
         var newMember = "<li class='member'><img src='/assets/img/person.svg'></li>";
-		$(this).next('.members').after(newMember);
+        var target = $(this).first('.members');
+		target.after(newMember);
 	});
-    
-}
-function removeImage(){
+
     $('member').on('click', function(){
         $(this).remove();
     });
-}
-showImage();
-removeImage();
+});

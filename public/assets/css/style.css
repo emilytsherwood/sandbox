@@ -1792,15 +1792,7 @@ article img.pull-right, article .align-right{
 	margin-top:40px;
 }
 
-.members {
-    max-height: 30px;
-}
-.members li {
-    float: left;
-}
-.member img {
-    max-height: 30px;
-}
+
 
 /* =============================
 21. Media queries 
@@ -1996,4 +1988,21 @@ article img.pull-right, article .align-right{
 
 @media (max-width: 360px) {
 
+    ul {
+        list-style: none;
+    }
+
+    .members {
+        max-height: 30px;
+
+    }
+    .members li {
+        float: left;
+    }
+    .member img {
+        max-height: 30px;
+    }
+    
 }
+
+
