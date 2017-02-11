@@ -272,6 +272,14 @@ module.exports = function (app) {
                                         console.log('Message %s sent: %s', info.messageId, info.response);
                                     });
 
+                                    db.Post.update({
+                                            capacity: true
+                                        }, {                                     
+                                            where: {
+                                            id: selectPostId
+                                            }
+                                        });
+
                                     res.redirect('/');    
 
                                }
