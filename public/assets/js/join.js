@@ -1,11 +1,14 @@
 function showImage() {
-	$('.join').on('click', 'button', function(){
-		$(this).append("<span class='member'><img src='../img/person.svg'></span>");
+	$('.join').on('click', function(){
+        var newMember = "<span class='member'><img src='/assets/img/person.svg'></span>";
+		$('.members').after(newMember);
 	});
+    
 }
-
-function getGroupLimit() {
-
+function removeImage(){
+    $('member').on('click', function(){
+        $(this).remove();
+    });
 }
-var groupLimit = $('join');
-// for (var x <= $(groupLimit);
+showImage();
+removeImage();
