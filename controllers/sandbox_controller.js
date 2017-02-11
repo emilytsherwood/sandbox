@@ -107,12 +107,7 @@ module.exports = function (app) {
             console.log("POSTBOY "+JSON.stringify(newPost));
             if(req.body['body'] !== "" || req.body['groupLimit'] !== ""){
 
-                if (typeof localStorage === "undefined" || localStorage === null) {
-                  var LocalStorage = require('node-localstorage').LocalStorage;
-                  localStorage = new LocalStorage('./scratch');
-                }
-
-                var currentUser = localStorage.getItem('currentUser');
+                var currentUser = req.user._json.email;
                 // Makes sure something is inputed
                 Promise.all([
                         db.User.find({
@@ -185,12 +180,7 @@ module.exports = function (app) {
 
         else {
 
-            if (typeof localStorage === "undefined" || localStorage === null) {
-              var LocalStorage = require('node-localstorage').LocalStorage;
-              localStorage = new LocalStorage('./scratch');
-            }
-
-            var currentUser = localStorage.getItem('currentUser');
+            var currentUser = req.user._json.email;
 
             var selectPostId = req.body.postId;
             var selectGroupLimit = req.body.groupLimit;

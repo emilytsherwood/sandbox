@@ -42,13 +42,6 @@ module.exports = {
         var pictureUrl = req.user._json.avatar_url;
         var email = req.user._json.email;
 
-        if (typeof localStorage === "undefined" || localStorage === null) {
-          var LocalStorage = require('node-localstorage').LocalStorage;
-          localStorage = new LocalStorage('./scratch');
-        }
-
-        localStorage.setItem('currentUser', email);
-
         db.User.findOrCreate({
           where: {user_name: username
         }, defaults: {
