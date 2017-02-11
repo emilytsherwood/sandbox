@@ -137,6 +137,7 @@
             {{#each posts}}
             {{#unless capacity}}
                <div class="col-lg-3">
+               <center><img src="#" height="75" width="75"></center>
                   <p>
                   <form action="/post/join" method="POST" class="join">
                      <input type="hidden" name="postId" value="{{this.id}}">
