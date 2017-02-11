@@ -1792,7 +1792,15 @@ article img.pull-right, article .align-right{
 	margin-top:40px;
 }
 
-
+.members {
+    max-height: 30px;
+}
+.member img {
+    max-height: 30px;
+}
+.member {
+    float: left;
+}
 /* =============================
 21. Media queries 
 ============================= */
