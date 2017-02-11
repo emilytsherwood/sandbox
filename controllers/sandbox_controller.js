@@ -17,6 +17,14 @@ let transporter = nodemailer.createTransport({
 
 // Export these awesome routes
 module.exports = function (app) {
+
+     app.get('/past', function(req, res){
+        db.Post.findAll({})
+        .then(function (result) {
+                
+            res.render('pastProjects', {posts: result});
+            });
+    });
     // Get the root route
     app.get("/", function (req, res, next) {
         Promise.all([
@@ -255,11 +263,15 @@ module.exports = function (app) {
                                         console.log('Message %s sent: %s', info.messageId, info.response);
                                     });
 
-                                    db.Post.destroy({
-                                        where: {
-                                            id: selectPostId
-                                        }
-                                    })
+                                    db.Post.update({
+                                            capacity: true
+                                        }, {                                     
+                                            where: {
+                                                id: selectPostId
+                                            }
+                                        });
+
+                                    
                                }
 
                             });
