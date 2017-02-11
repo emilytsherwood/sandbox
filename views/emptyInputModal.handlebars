@@ -43,7 +43,7 @@
                      <h4>Hello, {{user.displayName}}</h4>
                      {{else}}
                      <li class="active"><a href="/">Home</a></li>
-                     <li><a href="/auth/github/callback">Login With Gihub</a></li>
+                     <li><a href="/login">Login</a></li>
                      <h4>Welcome! Please log in.</h4>
                      {{/if}}
                      {{msg}}
@@ -65,21 +65,21 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                <div class="item active">
-                  <img src="/assets/img/slides/img2.jpg" width="100%" alt="">
+                  <img src="/assets/img/slides/1.jpg" width="100%" alt="">
                   <div class="flex-caption">
                     <h3>EXPLORE</h3>
                     <p>Explore projects, join a team and begin! It's that simple.</p>
                   </div>
                </div>
                <div class="item">
-                  <img src="/assets/img/slides/img1.jpeg" width="100%" alt="">
+                  <img src="/assets/img/slides/2.jpg" width="100%" alt="">
                   <div class="flex-caption">
                     <h3>INNOVATE</h3>
                     <p>Put your skills to work and start building!</p>
                   </div>
                </div>
                <div class="item">
-                  <img src="/assets/img/slides/img3.jpeg" width="100%" alt="">
+                  <img src="/assets/img/slides/3.jpg" width="100%" alt="">
                   <div class="flex-caption">
                     <h3>CONNECT</h3>
                     <p>Be part of a community passionate about web development.</p>
@@ -150,12 +150,8 @@
                            {{number}}
                         </div>
                      </div>
-                    <div class="members">
-                       <span class="member"><img src="/assets/img/person.svg"></span>
-                    </div>
                   </div>
                </div>
-                
                {{/each}}
             </div>
          </div>
@@ -241,19 +237,40 @@
 </footer>
 </div>
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+
+<!-- Modal -->
+<div class="modal fade" id="emptyInput" tabindex="-1" role="dialog" aria-labelledby="fullGroup" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="fullGroup">Oops!</h3>
+      </div>
+      <div class="modal-body">
+      <h3>Please enter something!</h3>
+      </div>
+      <div class="modal-footer">
+
+        <form class="form-horizontal" method="GET" action="/" class="button-size">
+            <button type="submit" class="btn btn-success btn-block">Got it!</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Placed at the end of the document so the pages load faster -->
-
-<script src="assets/js/jquery.js"></script>
-<script src="assets/js/jquery.easing.1.3.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/google-code-prettify/prettify.js"></script>
-<script src="assets/js/jquery.flexslider.js"></script>
-<script src="assets/js/animate.js"></script>
-<script src="assets/js/custom.js"></script>
-<script src="assets/js/join.js"></script>
-
-
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.easing.1.3.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/google-code-prettify/prettify.js"></script>
+<script src="/assets/js/jquery.flexslider.js"></script>
+<script src="/assets/js/animate.js"></script>
+<script src="/assets/js/custom.js"></script>
 <script type="text/javascript">
+
+   $("#emptyInput").modal();
+
    $(document).ready(function () {
        $('.carousel').carousel({
            interval: 2500

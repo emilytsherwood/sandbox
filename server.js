@@ -37,12 +37,12 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:8080/auth/github/callback"
+    callbackURL: "https://damp-plains-99947.herokuapp.com/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
 
     process.nextTick(function () {
-      
+
       return done(null, profile);
     });
   }
@@ -57,7 +57,7 @@ app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: fals
 app.use(methodOverride("_method"));
 
 // Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static(process.cwd() + "/public"));
+// app.use(express.static(process.cwd() + "/public"));
 
 //using bodyparser for post and put data
 app.use(bodyParser.json());
@@ -69,22 +69,24 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // persistent login sessions (recommended).
 app.use(passport.initialize());
 app.use(passport.session());
+// app.use(express.static(__dirname + '/public'));
+
+// Links the static content (i.e. css and images)
 app.use(express.static(__dirname + '/public'));
+//
 
 // Set the engine up for handlebars
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Links the static content (i.e. css and images)
-app.use(express.static(__dirname + '/public'));
 
 //importing routes
 var sandboxRoutes = require("./controllers/sandbox_controller.js")(app);
 
-var loginRoutes = require("./controllers/login_controller.js")(app);
+var loginRoutes = require("./controllers/login_controller.js").routes(app);
 
-//syncing database and listening 
-db.sequelize.sync().then(function() {
+//syncing database and listening
+db.sequelize.sync({force: true}).then(function() {
     app.listen(PORT, function () {
 console.log("App listening this awesome PORT: " + PORT);
     });

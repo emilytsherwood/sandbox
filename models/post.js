@@ -13,6 +13,17 @@ module.exports = function (sequelize, DataTypes) {
                 len: [3-140]
             }
         },
+        groupLimit: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        authorEmail: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [2]
+            }
+        },
         createdAt: {
             type: DataTypes.DATE,
             allowNull: false,
