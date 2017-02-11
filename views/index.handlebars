@@ -105,13 +105,13 @@
                            <br>
                            <div class="form-group">
                               <div class="col-xs-12">
-                                 <input placeholder="IDEA" type="text" name="foo" maxlength="140" class="form-control" >
-                                 <input placeholder="NUMBER" type="number" name="num" value="1" min="2" max="5" class="form-control">
+                                 <input placeholder="IDEA" type="text" name="foo" maxlength="140" minlength="2" class="form-control" >
+                                 <input placeholder="NUMBER" type="number" name="num" min="2" max="5" class="form-control">
                               </div>
                            </div>
                            <div class="form-group">
                               <div class="col-xs-12">
-                                 <button type="submit" class="btn btn-success">Idea!</button>
+                                 <button id='create' type="submit" class="btn btn-success">Idea!</button>
                               </div>
                            </div>
                         </fieldset>
@@ -252,10 +252,25 @@
 <script type="text/javascript">
    $(document).ready(function () {
        $('.carousel').carousel({
-
            interval: 2500
        });
+       // $('#create').on('click', function (){
+       //   // Form validation of user input
+       //    function validate() {
+       //      var isValid = true;
+       //      $('.form-control').each(function() {
+       //        if ($(this).val() === '')
+       //          isValid = false;
+       //      });
+       //      return isValid;
+       //    }
+       //    if (validate() !== true) {
+       //      alert('Stop!');
+
+       //    }
+       // });
    });
+
 
        // $('.carousel').carousel('cycle');
 

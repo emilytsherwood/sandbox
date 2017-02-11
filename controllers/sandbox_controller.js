@@ -79,6 +79,7 @@ module.exports = function (app) {
                 body: newPost.foo
             })
         ]).then(function (result) {
+            if (newPost.foo !== "") {
             console.log("HEY_______________________: " + JSON.stringify(result[0].id));
             Promise.all([
                 db.Post.findAll({
@@ -91,9 +92,15 @@ module.exports = function (app) {
                 console.log("RESULT: " + JSON.stringify(result) + "UserID: " + result[1][0].id + "PostId: " + result[0][0].id);
                 db.UserPost.create({
                     UserId: result[1][0].id,
-                    PostId: result[0][0].id
+                    PostId: result[0][0].id,
+
                 });
             });
+        }else{
+            alert('stopppppppppp');
+        }
+
+
         }).then(function (result) {
             res.redirect('/');
         }).catch(function (e) {
