@@ -105,33 +105,46 @@ module.exports = function (app) {
         else{
             var newPost = req.body;
             console.log("POSTBOY "+JSON.stringify(newPost));
+            if(req.body['body'] !== "" || req.body['groupLimit'] !== ""){
 
-            if (typeof localStorage === "undefined" || localStorage === null) {
-              var LocalStorage = require('node-localstorage').LocalStorage;
-              localStorage = new LocalStorage('./scratch');
-            }
+                if (typeof localStorage === "undefined" || localStorage === null) {
+                  var LocalStorage = require('node-localstorage').LocalStorage;
+                  localStorage = new LocalStorage('./scratch');
+                }
 
-            var currentUser = localStorage.getItem('currentUser');
-            // Makes sure something is inputed
-            Promise.all([
-                    db.User.find({
-                        where: {
-                            email: currentUser
-                        }
-                    })
-                ]).then(function (result) {
-                    console.log("RESULT: " + JSON.stringify(result));
-                    db.Post.create({
-                        authorEmail: result[0]['email'],
-                        groupLimit: newPost['groupLimit'],
-                        body: newPost['body']
-                    }).then(function (result) {
-                        res.redirect('/');
-                    }).catch(function (err) {
-                        console.log(err);
+                var currentUser = localStorage.getItem('currentUser');
+                // Makes sure something is inputed
+                Promise.all([
+                        db.User.find({
+                            where: {
+                                email: currentUser
+                            }
+                        })
+                    ]).then(function (result) {
+                        console.log("RESULT: " + JSON.stringify(result));
+                        db.Post.create({
+                            authorEmail: result[0]['email'],
+                            groupLimit: newPost['groupLimit'],
+                            body: newPost['body']
+                        }).then(function (result) {
+                            res.redirect('/');
+                        }).catch(function (err) {
+                            console.log(err);
+                        });
                     });
-                });
-
+                } else {
+                    Promise.all([
+                        db.Post.findAll({}),
+                        db.User.findAll({}),
+                        db.UserPost.findAll({})
+                    ]).then(function (result) {
+                        res.render("emptyInputModal", {
+                            posts: result[0] || [],
+                            users: result[1] || [],
+                            groups: result[2] || []
+                        });
+                    });
+                }
             // Promise.all([
             //     db.Post.create({
             //         groupLimit: newPost.groupLimit,
@@ -225,7 +238,7 @@ module.exports = function (app) {
                                     postId: selectPostId
                                 }
                             }).then(function (result) {
-                                
+
                                 var listOfEmails="";
 
                                 for (var i = 0; i < result.length; i++) {
@@ -234,7 +247,7 @@ module.exports = function (app) {
                                 }
 
                                 listOfEmails = listOfEmails.slice(0, (listOfEmails.length - 2))
-                                
+
                                if (result.length == selectGroupLimit) {
                                     // setup email data with unicode symbols
                                     let mailOptions = {
@@ -257,7 +270,7 @@ module.exports = function (app) {
                                             id: selectPostId
                                         }
                                     })
-                               } 
+                               }
 
                             });
 
