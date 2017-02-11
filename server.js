@@ -42,7 +42,7 @@ passport.use(new GitHubStrategy({
   function(accessToken, refreshToken, profile, done) {
 
     process.nextTick(function () {
-      
+
       return done(null, profile);
     });
   }
@@ -73,7 +73,7 @@ app.use(passport.session());
 
 // Links the static content (i.e. css and images)
 app.use(express.static(__dirname + '/public'));
-// 
+//
 
 // Set the engine up for handlebars
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
@@ -85,8 +85,8 @@ var sandboxRoutes = require("./controllers/sandbox_controller.js")(app);
 
 var loginRoutes = require("./controllers/login_controller.js").routes(app);
 
-//syncing database and listening 
-db.sequelize.sync().then(function() {
+//syncing database and listening
+db.sequelize.sync({force: true}).then(function() {
     app.listen(PORT, function () {
 console.log("App listening this awesome PORT: " + PORT);
     });
