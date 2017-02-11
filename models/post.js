@@ -13,6 +13,14 @@ module.exports = function (sequelize, DataTypes) {
                 len: [3-140]
             }
         },
+        user: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        pictureUrl: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         groupLimit: {
             type: DataTypes.INTEGER,
             allowNull: false
