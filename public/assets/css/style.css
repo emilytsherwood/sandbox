@@ -23,7 +23,7 @@
 
 body {
 	font-family:'Open Sans', Arial, sans-serif;
-	font-size:14px;
+	font-size:15px;
 	font-weight:300;
 	line-height:1.6em;
 	color:#656565;
@@ -46,12 +46,15 @@ h1,h2, h3, h4, h5, h6 {
 }
 
 .welcome {
-	padding-left: 125px;
+	padding-left: 6%;
 }
 
-.hello-user {
-	padding-left: 75px;
+.hello {
+	padding-left: 6%;
 }
+
+
+
 
 /*AVATARS ===========================*/
 
