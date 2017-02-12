@@ -41,12 +41,16 @@
                      <li><a href="/account">Account</a></li>
                      <li><a href="/past">Past Projects</a></li>
                      <li><a href="/logout">Log Out</a></li>
-                     <h4 class="welcome">Hello, {{user.displayName}}</h4>
+                     <div>
+                     <h4 class="hello">Hello, {{user.displayName}}</h4>
+                     </div>
                      {{else}}
                      <li class="active"><a href="/">Home</a></li>
                      <li><a href="/past">Past Projects</a></li>
                      <li><a href="/auth/github/callback">Login With Github</a></li>
+                     <div>
                      <h4 class="welcome">Welcome! Please log in.</h4>
+                     </div>
                      {{/if}}
                      {{msg}}
                   </ul>
