@@ -43,7 +43,14 @@ h1,h2, h3, h4, h5, h6 {
 	line-height:1.1em;
 	color:#333;
 	margin-bottom: 20px;
+}
+
+.welcome {
 	padding-left: 125px;
+}
+
+.hello-user {
+	padding-left: 75px;
 }
 
 /*AVATARS ===========================*/
