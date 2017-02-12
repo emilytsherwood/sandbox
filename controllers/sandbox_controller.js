@@ -150,16 +150,7 @@ module.exports = function (app) {
                         });
                     });
                 }
-            // Promise.all([
-            //     db.Post.create({
-            //         groupLimit: newPost.groupLimit,
-            //         body: newPost.body
-            //     })
-            // ]).then(function (result) {
-            //     res.redirect('/');
-            // }).catch(function (e) {
-            //     console.log(e);
-            // });
+
         }
     });
 
