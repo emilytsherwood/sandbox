@@ -41,12 +41,12 @@
                      <li><a href="/account">Account</a></li>
                      <li><a href="/past">Past Projects</a></li>
                      <li><a href="/logout">Log Out</a></li>
-                     <h4>Hello, {{user.displayName}}</h4>
+                     <h4 class="welcome">Hello, {{user.displayName}}</h4>
                      {{else}}
                      <li class="active"><a href="/">Home</a></li>
                      <li><a href="/past">Past Projects</a></li>
                      <li><a href="/auth/github/callback">Login With Github</a></li>
-                     <h4>Welcome! Please log in.</h4>
+                     <h4 class="welcome">Welcome! Please log in.</h4>
                      {{/if}}
                      {{msg}}
                   </ul>
@@ -161,10 +161,10 @@
                   </div>
                                        
                </div>
-               <div class="social-network members">
-                           <span class="member"><img src="/assets/img/person.svg"></span>
+               <!-- <div class="social-network members">
+                  <span class="member"><img src="/assets/img/person.svg"></span>
                         
-                </div>
+                </div> -->
                {{/unless}}
                {{/each}}
             </div>
