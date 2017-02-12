@@ -35,13 +35,13 @@
                   <a class="navbar-brand"><span>S</span>andbox</a>
                </div>
                <div class="navbar-collapse collapse ">
-                  <ul class="nav navbar-nav">
+                  <ul class="nav navbar-nav welcome-style">
                      {{#if user}}
                      <li class="active"><a href="/">Home</a></li>
                      <li><a href="/account">Account</a></li>
                      <li><a href="/past">Past Projects</a></li>
                      <li><a href="/logout">Log Out</a></li>
-                     <h4 class="welcome">Hello, {{user.displayName}}</h4>
+                     <h4>Hello, {{user.displayName}}</h4>
                      {{else}}
                      <li class="active"><a href="/">Home</a></li>
                      <li><a href="/past">Past Projects</a></li>
