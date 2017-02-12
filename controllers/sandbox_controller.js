@@ -12,9 +12,6 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-
-
-
 // Export these awesome routes
 module.exports = function (app) {
 
