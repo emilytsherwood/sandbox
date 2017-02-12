@@ -173,7 +173,7 @@ module.exports = function (app) {
         });
     });
     app.post('/post/join', function (req, res) {
-
+        //if user is not logged in, serve modal
         if(loginBool.loggedIn===false){
             Promise.all([
                     db.Post.findAll({}),
@@ -187,34 +187,15 @@ module.exports = function (app) {
                     });
                 });
         }
-
+        //if user is logged in
         else {
 
+            //get the info of the current user and the post he/she just selected
             var currentUser = req.user._json.email;
-
             var selectPostId = req.body.postId;
             var selectGroupLimit = req.body.groupLimit;
 
-            db.UserPost.findAll({
-                where: {
-                    postId: selectPostId
-                }
-            }).then(function (result) {
-
-                if (result.length >= selectGroupLimit) {
-                    Promise.all([
-                        db.Post.findAll({}),
-                        db.User.findAll({}),
-                        db.UserPost.findAll({})
-                    ]).then(function (result) {
-                        res.render("groupIsFull", {
-                            posts: result[0] || [],
-                            users: result[1] || [],
-                            groups: result[2] || []
-                        });
-                    });
-                } else {
-                    console.log("selectPost: " + selectPostId);
+                 // console.log("selectPost: " + selectPostId);
                     Promise.all([
                         db.Post.find({
                             where: {
@@ -239,6 +220,7 @@ module.exports = function (app) {
                                 PostId: selectPostId
                         }})
                         .then(function (result) {
+                            
                             db.UserPost.findAll({
                                 where: {
                                     postId: selectPostId
@@ -285,23 +267,44 @@ module.exports = function (app) {
                                }
 
                                else{
-                                    Promise.all([
-                                        db.Post.findAll({}),
-                                        db.User.findAll({}),
-                                        db.UserPost.findAll({})
-                                    ]).then(function (result) {
-                                        var posts = result[0];
-                                        var users = result[1];
-                                        var groups = result[2];
-                                        res.render("cantJoinModal", {
-                                            posts: posts,
-                                            users: users,
-                                            groups: groups,
-                                            user: req.user
+
+                                    var userAlreadyJoinBool=false;
+
+                                    for (var i = 0; i < result.length; i++) {
+                                        if(result[i]['userEmail'] == currentUser){
+                                           userAlreadyJoinBool=true; 
+                                        }
+                                    }
+
+                                    if(userAlreadyJoinBool === true){
+
+                                        Promise.all([
+                                            db.Post.findAll({}),
+                                        ]).then(function (result) {
+                                            var posts = result[0];
+                                            res.render("cantJoinModal", {
+                                                posts: posts,
+                                                user: req.user
+                                            });
+                                        }).catch(function (e) {
+                                            console.log(e);
                                         });
-                                    }).catch(function (e) {
-                                        console.log(e);
-                                    });
+
+                                    } else{
+
+                                        Promise.all([
+                                            db.Post.findAll({}),
+                                        ]).then(function (result) {
+                                            var posts = result[0];
+                                            res.render("JoinModal", {
+                                                posts: posts,
+                                                user: req.user
+                                            });
+                                        }).catch(function (e) {
+                                            console.log(e);
+                                        });
+
+                                    }
                                }
 
                             });
@@ -311,36 +314,8 @@ module.exports = function (app) {
                             console.log(err);
                         });
                     });
-                }
-            });
         }
-        // var newGroup = req.body;
-        // var selectPost = req.params.id;
-        // console.log("selectPost: " + selectPost);
-        // db.Post.find({
-        //     where: {
-        //         id: selectPost
-        //     }
-        // }).then(function (result) {
-        //     db.UserPost.create({
-        //         UserId: 3,
-        //         PostId: selectPost
-        //     }).then(function (result) {
-        //         res.redirect('/');
-        //     }).catch(function (err) {
-        //         console.log(err);
-        //     });
-        // });
+
     });
-    // app.get('/', function (req, res) {
-    //     // Makes sure something is inputed
-    //     db.UserPost.findAll({
-    //         where: {
-    //             postId: 1
-    //         }
-    //     }).then(function (result) {
-    //         return res.json(result);
-    //     }
-    //     });
-    // });
+
 };
