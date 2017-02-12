@@ -98,19 +98,14 @@ module.exports = function (app) {
 
         if(loginBool.loggedIn===false){
             Promise.all([
-                    db.Post.findAll({}),
-                    db.User.findAll({}),
-                    db.UserPost.findAll({})
+                    db.Post.findAll({})
                 ]).then(function (result) {
                     res.render("pleaseLoginModal", {
-                        posts: result[0] || [],
-                        users: result[1] || [],
-                        groups: result[2] || []
+                        posts: result[0] || []
                     });
                 });
-        }
+        } else {
 
-        else{
             var newPost = req.body;
             console.log("POSTBOY "+JSON.stringify(newPost));
             if(req.body['body'] !== "" || req.body['groupLimit'] !== ""){
@@ -125,28 +120,34 @@ module.exports = function (app) {
                         })
                     ]).then(function (result) {
                         console.log("RESULT: " + JSON.stringify(result));
-                        db.Post.create({
-                            authorEmail: result[0]['email'],
-                            groupLimit: newPost['groupLimit'],
-                            body: newPost['body'],
-                            pictureUrl: result[0]['picture_url'],
-                            user: result[0]['user_name']
-                        }).then(function (result) {
-                            res.redirect('/');
+
+                        
+                            db.Post.create({
+                                authorEmail: result[0]['email'],
+                                groupLimit: newPost['groupLimit'],
+                                body: newPost['body'],
+                                pictureUrl: result[0]['picture_url'],
+                                user: result[0]['user_name'],
+                                authorId: result[0]['id']
+                            }).then(function (result) {
+
+                                db.userPost.create({
+                                    userEmail: currentUser,
+                                    UserId: result['authorId'],
+                                    PostId: result['id']
+                                })
+
+                                res.redirect('/');
                         }).catch(function (err) {
                             console.log(err);
                         });
                     });
                 } else {
                     Promise.all([
-                        db.Post.findAll({}),
-                        db.User.findAll({}),
-                        db.UserPost.findAll({})
+                        db.Post.findAll({})
                     ]).then(function (result) {
                         res.render("emptyInputModal", {
-                            posts: result[0] || [],
-                            users: result[1] || [],
-                            groups: result[2] || []
+                            posts: result[0] || []
                         });
                     });
                 }
@@ -202,11 +203,11 @@ module.exports = function (app) {
                         // console.log("RESULT: " + JSON.stringify(result[1]['id']));
                         db.UserPost.findOrCreate({
                             where: {
-                                userEmail: result[1]['email'],
+                                userEmail: currentUser,
                                 UserId: result[1]['id'],
                                 PostId: selectPostId
                         }, defaults: {
-                                userEmail: result[1]['email'],
+                                userEmail: currentUser,
                                 UserId: result[1]['id'],
                                 PostId: selectPostId
                         }})
