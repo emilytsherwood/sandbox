@@ -173,7 +173,7 @@ module.exports = function (app) {
         });
     });
     app.post('/post/join', function (req, res) {
-
+        console.log(req.user);
         if(loginBool.loggedIn===false){
             Promise.all([
                     db.Post.findAll({}),
