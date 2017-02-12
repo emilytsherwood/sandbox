@@ -111,7 +111,7 @@
                                  <br>
                               </div>
                               <div class="col-lg-4 col-lg-offset-4">
-                                 <input placeholder="# Needed" type="number" min='2' max='5' name="groupLimit" class="form-control" required>
+                                 <input placeholder="# Needed" type="number" min='1' max='5' name="groupLimit" class="form-control" required>
                               </div>
                            </div>
                            <div class="form-group">
@@ -137,15 +137,15 @@
             {{#each posts}}
             {{#unless capacity}}
                <div class="col-lg-3">
-               <center><img src="{{pictureUrl}}" height="75" width="75"></center>
+               <center><img src="{{pictureUrl}}" height="60" width="60"></center>
                <center><h6>{{user}}</h6></center>
                   <p>
-                  <form action="/post/join" method="POST" class="join">
+                  <form action="/post/join" method="POST">
                      <input type="hidden" name="postId" value="{{this.id}}">
                      <input type="hidden" name="groupLimit" value="{{this.groupLimit}}">
                      <input type="hidden" name="capacity" value="false">
                      <div class="box-bottom">
-                        <button type="submit" id="build" margin="20px" class="btn btn-success">Build this Idea</button>
+                        <button type="submit" id="build" margin="20px" class="btn btn-success" class="join">Build this Idea</button>
                      </div>
                   </form>
                   </p>
@@ -161,7 +161,7 @@
                                        
                </div>
                <div class="social-network members">
-                           <span class="member"><img src="/assets/img/person.svg"></span>
+                  <span class="member"><img src="/assets/img/person.svg"></span>
                         
                 </div>
                {{/unless}}
@@ -263,7 +263,6 @@
            interval: 2500
        });
    });
-       // $('.carousel').carousel('cycle');
 </script>
 </body>
 </html>
