@@ -11,17 +11,13 @@ let transporter = nodemailer.createTransport({
         pass: 'ayew4ssupBruh!'
     }
 });
-
-
-
-
 // Export these awesome routes
 module.exports = function (app) {
 
      app.get('/past', function(req, res){
         db.Post.findAll({})
         .then(function (result) {
-                
+
             res.render('pastProjects', {posts: result});
             });
     });
@@ -274,13 +270,13 @@ module.exports = function (app) {
 
                                     db.Post.update({
                                             capacity: true
-                                        }, {                                     
+                                        }, {
                                             where: {
                                             id: selectPostId
                                             }
                                         });
 
-                                    res.redirect('/');    
+                                    res.redirect('/');
 
                                }
 

@@ -1,15 +1,16 @@
-// Require functions from the models folder (index.js and burger.js)
+// Require functions from the models folder
 var db = require("../models");
 // Export these awesome routes
 var passport = require('passport');
- 
+
 
 module.exports = {
   loggedIn: false,
-  routes: function (app) { 
+  routes: function (app) {
 
     app.get('/login', function(req, res){
       res.render('login', { user: req.user });
+      console.log('WHAT THE FUCK: ' + result);
     });
 
     app.get('/account', ensureAuthenticated, function(req, res){
@@ -33,7 +34,7 @@ module.exports = {
     //   request.  If authentication fails, the user will be redirected back to the
     //   login page.  Otherwise, the primary route function will be called,
     //   which, in this example, will redirect the user to the home page.
-    app.get('/auth/github/callback', 
+    app.get('/auth/github/callback',
       passport.authenticate('github', { failureRedirect: '/login' }),
       function(req, res) {
         module.exports.loggedIn = true;
@@ -51,12 +52,12 @@ module.exports = {
       .spread(function(user, created) {
         console.log(user.get({
           plain: true
-        }))
-        console.log(created)
+        }));
+        console.log(created);
 
         res.redirect('/');
 
-      })
+      });
 
       });
 
