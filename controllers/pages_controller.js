@@ -1,6 +1,7 @@
  // Require functions from the models folder (index.js and burger.js)
 var db = require("../models");
 var passport = require('passport');
+var path = require("path");
 // page routes   
 module.exports = function(app){
     app.get('/past', function(req, res){

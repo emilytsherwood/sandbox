@@ -9,6 +9,7 @@ var session = require('express-session');
 var GitHubStrategy = require('passport-github2').Strategy;
 var partials = require('express-partials');
 var PORT = process.env.PORT || 8080;
+var path = require("path");
 var db = require("./models");
 
 //for github passport
