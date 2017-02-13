@@ -5,8 +5,14 @@
  module.exports = function (app) {
      app.get('/past', function (req, res) {
          db.Post.findAll({}).then(function (result) {
+                var timeStamp = result.createdAt;
+                var cutTimeStamp = timeStamp.Substring(0,16);
+                var createdAt = posts.createdAt;
+                console.log(cutTimeStamp);
              res.render('pastProjects', {
-                 posts: result
+                posts: result,
+                createdAt: cutTimeStamp
+
              });
          });
      });
