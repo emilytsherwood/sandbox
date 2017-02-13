@@ -10,6 +10,7 @@
              ]
          }).then(function (result) {
             var createdAtArray = [];
+            var cutTimeStamp = createdAtArray.substring(0, 16);
             for (var i = 0; i < result.length; i++) {
                     createdAtArray.push(result[i].createdAt);
             }
@@ -17,7 +18,7 @@
              // var cutTimeStamp = timeStamp.substring(0, 16);
              res.render('pastProjects', {
                  posts: result,
-                 createdAt: createdAtArray
+                 createdAt: cutTimeStamp
                      // createdAt: cutTimeStamp
              });
          });
