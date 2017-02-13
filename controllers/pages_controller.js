@@ -13,11 +13,11 @@ module.exports = function(app){
 
 
     app.get('/terms', function (req, res) {
-        res.sendFile('/views/terms');
+        res.sendFile('./views/terms');
     });
     
 
     app.get('/privacy', function(req, res){
-        res.sendFile('/views/privacy');
+        res.sendFile('./views/privacy');
     });
 };
