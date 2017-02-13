@@ -5,7 +5,7 @@
  module.exports = function (app) {
      app.get('/past', function (req, res) {
          db.Post.findAll({}).then(function (result) {
-             var timeStamp = result.createdAt;
+             var timeStamp = result[0].createdAt;
              var cutTimeStamp = timeStamp.substring(0, 16);
              res.render('pastProjects', {
                  posts: result,
