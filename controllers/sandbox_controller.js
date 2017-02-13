@@ -226,6 +226,8 @@ module.exports = function (app) {
                                 }
                             }).then(function (result) {
 
+                                console.log("MODALMANANANA" + JSON.stringify(result));
+
                                if (result.length == selectGroupLimit) {
 
                                 var listOfEmails="";
