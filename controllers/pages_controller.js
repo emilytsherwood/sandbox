@@ -11,7 +11,7 @@
          }).then(function (result) {
             var createdAtArray = [];
             for (var i = 0; i < result.length; i++) {
-                    createdAtArray.push(result[i].createdAt.substring(0, 16));
+                    createdAtArray.push(result[i]);
             }
              // var timeStamp = result[0].createdAt;
              // var cutTimeStamp = timeStamp.substring(0, 16);
