@@ -165,13 +165,22 @@ module.exports = function (app) {
 
                     //if the user has not joined then create UserPost entry with the user and post info
                     } else{
+                        var emailBody;
+
                         Promise.all([
                             db.User.find({
                                 where: {
                                     email: currentUser
                                 }
+                            }),
+                            db.Post.find({
+                                where: {
+                                    id: selectPostId
+                                }
                             })
                         ]).then(function (result) {
+                            //save email body
+                            emailBody = result[1]['body'];
                             // after UserPost is created, check if group limit is met
                             db.UserPost.create({
                                 userEmail: currentUser,
@@ -202,7 +211,7 @@ module.exports = function (app) {
                                             to: listOfEmails, // list of receivers
                                             subject: 'SANDBOX COLLABORATION!', // Subject line
                                             text: 'Hi! Let\'s work together!', // plain text body
-                                            html: '<b>Hi! Let\'s work together!</b><p>This is an official email from Sandbox Dev!</p><p>Your group\'s contact information is below: </p>' + '"'+listOfEmails+'"'
+                                            html: '<b>Hi! Let\'s work together!</b><p>This is an official email from Sandbox Dev!</p><p>Your group\'s project description is written below: </p>' + '"'+emailBody+'"'
                                         };
 
                                         transporter.sendMail(mailOptions, (error, info) => {
