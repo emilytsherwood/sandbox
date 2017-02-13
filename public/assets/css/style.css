@@ -55,7 +55,9 @@ h1,h2, h3, h4, h5, h6 {
 	color: #5e5e5e;
 }
 
-
+.tiny-text {
+	font-size: 10px;
+}
 
 
 
