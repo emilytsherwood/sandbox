@@ -6,7 +6,7 @@
      app.get('/past', function (req, res) {
          db.Post.findAll({
              order: [
-                 ['updatedAt', 'DESC']
+                 ['createdAt', 'DESC']
              ]
          }).then(function (result) {
              // var timeStamp = result[0].createdAt;
