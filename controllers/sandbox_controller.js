@@ -138,8 +138,7 @@ module.exports = function (app) {
                                 user: result[0]['user_name'],
                                 authorId: result[0]['id']
                             }).then(function (result) {
-
-                                db.userPost.create({
+                                db.UserPost.create({
                                     userEmail: currentUser,
                                     UserId: result['authorId'],
                                     PostId: result['id']
