@@ -5,7 +5,7 @@ var db = require("../models");
 var loginBool = require("./login_controller");
 
 //require our modules
-// var passport = require('passport');
+var passport = require('passport');
 const nodemailer = require('nodemailer');
 
 //set up nodemailer
