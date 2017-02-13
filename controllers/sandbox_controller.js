@@ -203,7 +203,7 @@ module.exports = function (app) {
                                             to: listOfEmails, // list of receivers
                                             subject: 'SANDBOX COLLABORATION!', // Subject line
                                             text: 'Hi! Let\'s work together!', // plain text body
-                                            html: '<b>Hi! Let\'s work together!</b><p>This is an official email from Sandbox Dev!</p><p>Your group topic is: </p>' + '"'+req.body.email+'"'
+                                            html: '<b>Hi! Let\'s work together!</b><p>This is an official email from Sandbox Dev!</p><p>Your group topic is: </p>' + '"'+req.body+'"'
                                         };
 
                                         transporter.sendMail(mailOptions, (error, info) => {
