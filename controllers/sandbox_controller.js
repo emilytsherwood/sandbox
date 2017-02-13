@@ -45,7 +45,7 @@ module.exports = function (app) {
     app.post('/add/', function (req, res) {
 
         //if not logged in stop and send modal
-        if(loginBool.loggedIn===false){
+        if(loginBool.loggedIn == false || undefined || null){
             Promise.all([
                     db.Post.findAll({})
                 ]).then(function (result) {
