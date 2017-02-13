@@ -51,12 +51,12 @@ module.exports = {
       .spread(function(user, created) {
         console.log(user.get({
           plain: true
-        }))
-        console.log(created)
+        }));
+        console.log(created);
 
         res.redirect('/');
 
-      })
+      });
 
       });
 
