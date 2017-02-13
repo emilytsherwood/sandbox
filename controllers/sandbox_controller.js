@@ -111,22 +111,9 @@ module.exports = function (app) {
 
     //this route is used to join an idea from any user online
     app.post('/post/join', function (req, res) {
-        //if user is not logged in, stop and serve modal
-        if(loginBool.loggedIn===false){
-            Promise.all([
-                    db.Post.findAll({}),
-                    db.User.findAll({}),
-                    db.UserPost.findAll({})
-                ]).then(function (result) {
-                    res.render("pleaseLoginModal", {
-                        posts: result[0] || [],
-                        users: result[1] || [],
-                        groups: result[2] || []
-                    });
-                });
-        }
+        
         //if user is logged in
-        else {
+        if (loginBool.loggedIn) {
 
             //get the info of the current user and the post he/she just selected
             var currentUser = req.user._json.email;
@@ -239,7 +226,7 @@ module.exports = function (app) {
 
                                }
 
-                               else{
+                               else {
 
                                     Promise.all([
                                             db.Post.findAll({}),
@@ -264,6 +251,22 @@ module.exports = function (app) {
 
                 });
         }
+
+        //if user is not logged in, stop and serve modal
+        else{
+            Promise.all([
+                    db.Post.findAll({}),
+                    db.User.findAll({}),
+                    db.UserPost.findAll({})
+                ]).then(function (result) {
+                    res.render("pleaseLoginModal", {
+                        posts: result[0] || [],
+                        users: result[1] || [],
+                        groups: result[2] || []
+                    });
+                });
+        }
+
 
     });
 };
