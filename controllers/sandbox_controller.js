@@ -23,7 +23,7 @@ module.exports = function (app) {
     // Get the root route
     app.get("/", function (req, res, next) {
         Promise.all([
-            db.Post.findAll({}),
+            db.Post.findAll({order: [['updatedAt', 'DESC']]}),
             db.User.findAll({}),
             db.UserPost.findAll({})
         ]).then(function (result) {
