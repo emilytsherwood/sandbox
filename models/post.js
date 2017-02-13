@@ -54,10 +54,7 @@ module.exports = function (sequelize, DataTypes) {
         classMethods: {
             associate: function (models) {
                 Post.belongsToMany(models.User, {
-                    // as: "content",
                     through: models.UserPost
-                        // foreignKey: "postId",
-                        // constraints: false
                 });
             }
         }

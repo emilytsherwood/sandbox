@@ -3,8 +3,8 @@ var db = require("../models");
 // Export these awesome routes
 var passport = require('passport');
  
-
 module.exports = {
+  //made this into an object that exports login status within the app.  Didn't know passport did it for you.
   loggedIn: false,
   routes: function (app) { 
 
@@ -36,12 +36,14 @@ module.exports = {
     app.get('/auth/github/callback', 
       passport.authenticate('github', { failureRedirect: '/login' }),
       function(req, res) {
+        //change to true when logged in
         module.exports.loggedIn = true;
 
         var username = req.user._json.login;
         var pictureUrl = req.user._json.avatar_url;
         var email = req.user._json.email;
 
+        //uniquely logs user into database on login
         db.User.findOrCreate({
           where: {user_name: username
         }, defaults: {
@@ -56,31 +58,22 @@ module.exports = {
 
         res.redirect('/');
 
-      });
+        });
 
       });
 
     app.get('/logout', function(req, res){
-
+      //change to false when logged out
       module.exports.loggedIn = false;
 
       req.logout();
       res.redirect('/');
     });
 
-//     app.post('/user', function (req, res) {
-//         var newUser = req.body;
-//         // Makes sure something is inputed
-//         db.User.create({
-//             user_name: newUser.fooBar
-//         }).then(function (result) {
-//             res.redirect('/user');
-//         });
-//     });
-
+//function that passport uses to authenticate login, if fails then it redirects to home
     function ensureAuthenticated(req, res, next) {
       if (req.isAuthenticated()) { return next(); }
-      res.redirect('/login');
+      res.redirect('/');
     }
 
   }

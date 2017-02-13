@@ -85,6 +85,8 @@ var sandboxRoutes = require("./controllers/sandbox_controller.js")(app);
 
 var loginRoutes = require("./controllers/login_controller.js").routes(app);
 
+var pageRoutes = require("./controllers/pages_controller.js")(app);
+
 //syncing database and listening 
 db.sequelize.sync().then(function() {
     app.listen(PORT, function () {

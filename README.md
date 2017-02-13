@@ -23,7 +23,6 @@ Run npm install in the terminal/command line:
 * express-session: 1.15.0
 * method-override: 2.3.7
 * mysql: 2.13.0
-* node-localstorage: 1.3.0
 * nodemailer: 3.0.2
 * passport: 0.3.2
 * passport-github2: 0.1.10

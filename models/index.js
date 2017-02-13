@@ -31,33 +31,4 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-// db.User.belongsToMany(db.Post, {
-//                     as: "member",
-//                     through: {
-//                         model: models.UserPost,
-//                         unique: false
-//                     },
-//                     foreignKey: {
-//                         name: "userId",
-//                         allowNull: false
-//                     },
-//                     constraints: false
-//                 });
-// db.Post.belongsToMany(db.User,{
-//                     as: "content",
-//                     through: {
-//                         model: models.UserPost,
-//                         unique: false
-//                     },
-//                     foreignKey: "postId",
-//                     constraints: false
-//                 });
-
-// db.UserPost.belongsTo(db.Post, {
-//                     foreignKey: {
-//                         name: "group",
-//                         allowNull: false
-//                     }
-//                 });
-
 module.exports = db;
