@@ -15,10 +15,14 @@ module.exports = {
             //if not logged in stop and send modal
             if (JSON.stringify(req.user) === undefined) {
                 Promise.all([
-                    db.Post.findAll({})
+                    db.Post.findAll({}),
+                    db.User.findAll({}),
+                    db.UserPost.findAll({})
                 ]).then(function (result) {
                     res.render("pleaseLoginModal", {
-                        posts: result[0] || []
+                        posts: result[0] || [],
+                        users: result[1] || [],
+                        groups: result[2] || []
                     });
                 });
             } else {
