@@ -79,8 +79,8 @@
                   <form action="/{{id}}?_method=PUT" method="POST">
                      <input type="hidden" name="capacity" value="true">
                      <div class="box-bottom">
-                        <img src="{{pictureUrl}}" height="30" width="30"> 
-                        <h5>Host: {{user}}</h5>             
+                        <img src="{{pictureUrl}}" height="30" width="30">
+                        <h5>Host: {{user}}</h5>
                      </div>
                   </form>
                   </p>
@@ -91,7 +91,7 @@
                            <p>{{body}}</p>
                         </div>
                      </div>
-                     <p class="tiny-text"><strong>Created On: </strong>{{createdAt}}</p>
+                     <p class="tiny-text"><strong>Created On: </strong>{{createdAt.substring(0,16)}}</p>
                   </div>
 
                </div>
