@@ -4,7 +4,7 @@
  // page routes
  module.exports = function (app) {
      app.get('/past', function (req, res) {
-         db.Post.findAll({}).then(function (result) {
+         db.Post.findAll({order: [['updatedAt', 'DESC']]}).then(function (result) {
              // var timeStamp = result[0].createdAt;
              // var cutTimeStamp = timeStamp.substring(0, 16);
              res.render('pastProjects', {
