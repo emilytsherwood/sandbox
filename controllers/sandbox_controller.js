@@ -43,9 +43,8 @@ module.exports = function (app) {
 
     // Post for creating Ideas
     app.post('/add/', function (req, res) {
-
         //if not logged in stop and send modal
-        if(req.user == false || undefined || null){
+        if(JSON.stringify(req.user) === undefined){
             Promise.all([
                     db.Post.findAll({})
                 ]).then(function (result) {
@@ -112,7 +111,7 @@ module.exports = function (app) {
     //this route is used to join an idea from any user online
     app.post('/post/join', function (req, res) {
         //if user is not logged in, stop and serve modal
-        if(req.user == false || undefined || null){
+        if(JSON.stringify(req.user) === undefined){
             Promise.all([
                     db.Post.findAll({}),
                     db.User.findAll({}),
