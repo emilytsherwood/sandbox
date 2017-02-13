@@ -25,6 +25,17 @@ module.exports = function (app) {
             res.render('pastProjects', {posts: result});
             });
     });
+
+    app.get('/terms', function (req, res) {
+    res.sendFile('terms');
+    });
+    
+    app.get('/privacy', function(req, res){
+      res.sendFile('privacy');
+    });
+
+
+
     // Get the root route
     app.get("/", function (req, res, next) {
         Promise.all([
