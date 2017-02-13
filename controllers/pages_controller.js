@@ -13,7 +13,7 @@
      app.get('/terms', function (req, res) {
          db.User.findAll({}).then(function (result) {
              var users = result[0];
-             res.render("index", {
+             res.render("terms", {
                  users: users,
                  user: req.user
              });
@@ -23,7 +23,7 @@
     app.get('/privacy', function (req, res) {
              db.User.findAll({}).then(function (result) {
                  var users = result[0];
-                 res.render("index", {
+                 res.render("privacy", {
                      users: users,
                      user: req.user
                  });
