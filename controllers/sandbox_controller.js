@@ -107,7 +107,28 @@ module.exports = function (app) {
 
         }
     });
-
+    // This route is used to access account information
+    app.get('/account', ensureAuthenticated, function (req, res) {
+            //if not logged in stop and send modal
+            if (JSON.stringify(req.user) === undefined) {
+                Promise.all([
+                    db.Post.findAll({}),
+                    db.User.findAll({}),
+                    db.UserPost.findAll({})
+                ]).then(function (result) {
+                    res.render("pleaseLoginModal", {
+                        posts: result[0] || [],
+                        users: result[1] || [],
+                        groups: result[2] || []
+                    });
+                });
+            } else {
+                res.render('account', {
+                    user: req.user,
+                    email: req.user.emails[0].value
+                });
+            }
+        });
     //this route is used to join an idea from any user online
     app.post('/post/join', function (req, res) {
         //if user is not logged in, stop and serve modal
