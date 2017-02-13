@@ -179,17 +179,80 @@ module.exports = function (app) {
                                 UserId: result[0]['id'],
                                 PostId: selectPostId                
                             }).then(function (result) {
-                                Promise.all([
-                                    db.Post.findAll({}),
-                                ]).then(function (result) {
-                                    var posts = result[0];
-                                    res.render("JoinModal", {
-                                        posts: posts,
-                                        user: req.user
-                                    });
-                                }).catch(function (e) {
-                                    console.log(e);
-                                });
+
+                                db.UserPost.findAll({
+                                where: {
+                                    postId: selectPostId
+                                }
+                            }).then(function (result) {
+
+                                   if (result.length == selectGroupLimit) {
+
+                                    var listOfEmails="";
+
+                                    for (var i = 0; i < result.length; i++) {
+                                        var recipient = result[i]['userEmail'] + ', ';
+                                        listOfEmails = listOfEmails.concat(recipient);
+                                    }
+
+                                    listOfEmails = listOfEmails.slice(0, (listOfEmails.length - 2))
+
+                                        // setup email data with unicode symbols
+                                        let mailOptions = {
+                                            from: '"SandBox Team 👻" <jkbuoyant@gmail.com>', // sender address
+                                            to: listOfEmails, // list of receivers
+                                            subject: 'SANDBOX COLLOBORATION!', // Subject line
+                                            text: 'Hi! Let\'s work together!', // plain text body
+                                            html: '<b>Hi! Let\'s work together!</b>' // html body
+                                        };
+
+                                        transporter.sendMail(mailOptions, (error, info) => {
+                                            if (error) {
+                                                return console.log(error);
+                                            }
+                                            console.log('Message %s sent: %s', info.messageId, info.response);
+                                        });
+
+                                        db.Post.update({
+                                                capacity: true
+                                            }, {                                     
+                                                where: {
+                                                id: selectPostId
+                                                }
+                                            });
+
+                                    Promise.all([
+                                        db.Post.findAll({}),
+                                    ]).then(function (result) {
+                                        var posts = result[0];
+                                        res.render("JoinModal", {
+                                            posts: posts,
+                                            user: req.user
+                                        });
+                                    }).catch(function (e) {
+                                        console.log(e);
+                                    });   
+
+                               }
+
+                               else{
+                                
+                                    Promise.all([
+                                            db.Post.findAll({}),
+                                        ]).then(function (result) {
+                                            var posts = result[0];
+                                            res.render("JoinModal", {
+                                                posts: posts,
+                                                user: req.user
+                                            });
+                                        }).catch(function (e) {
+                                            console.log(e);
+                                        });
+                                    }
+
+                            });
+
+
                             });
 
                         });
