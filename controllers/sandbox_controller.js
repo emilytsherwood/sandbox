@@ -220,18 +220,19 @@ module.exports = function (app) {
                                                 id: selectPostId
                                                 }
                                             });
-
-                                    Promise.all([
-                                        db.Post.findAll({}),
-                                    ]).then(function (result) {
-                                        var posts = result[0];
-                                        res.render("JoinModal", {
-                                            posts: posts,
-                                            user: req.user
-                                        });
-                                    }).catch(function (e) {
-                                        console.log(e);
-                                    });   
+                                        
+                                        res.redirect("/");
+                                    // Promise.all([
+                                    //     db.Post.findAll({}),
+                                    // ]).then(function (result) {
+                                    //     var posts = result[0];
+                                    //     res.render("JoinModal", {
+                                    //         posts: posts,
+                                    //         user: req.user
+                                    //     });
+                                    // }).catch(function (e) {
+                                    //     console.log(e);
+                                    // });   
 
                                }
 
