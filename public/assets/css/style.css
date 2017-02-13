@@ -27,6 +27,7 @@ body {
 	font-weight:300;
 	line-height:1.6em;
 	color:#656565;
+	background-color: #E8E3E6;
 }
 
 a:active {
@@ -164,7 +165,7 @@ header .navbar-collapse  ul.navbar-nav {
 }
 
 header .navbar-default{
-    background-color: #fff;
+    background-color: #f9f9f9;
 }
 
 header .nav li a:hover,
