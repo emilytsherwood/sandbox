@@ -219,20 +219,23 @@ module.exports = function (app) {
                                                 where: {
                                                 id: selectPostId
                                                 }
-                                            });
-                                        
-                                        res.redirect("/");
-                                    // Promise.all([
-                                    //     db.Post.findAll({}),
-                                    // ]).then(function (result) {
-                                    //     var posts = result[0];
-                                    //     res.render("JoinModal", {
-                                    //         posts: posts,
-                                    //         user: req.user
-                                    //     });
-                                    // }).catch(function (e) {
-                                    //     console.log(e);
-                                    // });   
+                                        });
+                                        // .then(function(result){
+                                        //     res.render("joinModal");
+                                            
+                                        // });
+
+                                    Promise.all([
+                                        db.Post.findAll({}),
+                                    ]).then(function (result) {
+                                        var posts = result[0];
+                                        res.render("joinModal", {
+                                            posts: posts,
+                                            user: req.user
+                                        });
+                                    }).catch(function (e) {
+                                        console.log(e);
+                                    });   
 
                                }
 
@@ -242,7 +245,7 @@ module.exports = function (app) {
                                             db.Post.findAll({}),
                                         ]).then(function (result) {
                                             var posts = result[0];
-                                            res.render("JoinModal", {
+                                            res.render("joinModal", {
                                                 posts: posts,
                                                 user: req.user
                                             });
