@@ -12,9 +12,6 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-
-
-
 // Export these awesome routes
 module.exports = function (app) {
 
@@ -109,19 +106,14 @@ module.exports = function (app) {
 
         if(loginBool.loggedIn===false){
             Promise.all([
-                    db.Post.findAll({}),
-                    db.User.findAll({}),
-                    db.UserPost.findAll({})
+                    db.Post.findAll({})
                 ]).then(function (result) {
                     res.render("pleaseLoginModal", {
-                        posts: result[0] || [],
-                        users: result[1] || [],
-                        groups: result[2] || []
+                        posts: result[0] || []
                     });
                 });
-        }
+        } else {
 
-        else{
             var newPost = req.body;
             console.log("POSTBOY "+JSON.stringify(newPost));
             if(req.body['body'] !== "" || req.body['groupLimit'] !== ""){
@@ -136,41 +128,38 @@ module.exports = function (app) {
                         })
                     ]).then(function (result) {
                         console.log("RESULT: " + JSON.stringify(result));
-                        db.Post.create({
-                            authorEmail: result[0]['email'],
-                            groupLimit: newPost['groupLimit'],
-                            body: newPost['body'],
-                            pictureUrl: result[0]['picture_url'],
-                            user: result[0]['user_name']
-                        }).then(function (result) {
-                            res.redirect('/');
+
+                        
+                            db.Post.create({
+                                authorEmail: result[0]['email'],
+                                groupLimit: newPost['groupLimit'],
+                                body: newPost['body'],
+                                pictureUrl: result[0]['picture_url'],
+                                user: result[0]['user_name'],
+                                authorId: result[0]['id']
+                            }).then(function (result) {
+
+                                db.userPost.create({
+                                    userEmail: currentUser,
+                                    UserId: result['authorId'],
+                                    PostId: result['id']
+                                })
+
+                                res.redirect('/');
                         }).catch(function (err) {
                             console.log(err);
                         });
                     });
                 } else {
                     Promise.all([
-                        db.Post.findAll({}),
-                        db.User.findAll({}),
-                        db.UserPost.findAll({})
+                        db.Post.findAll({})
                     ]).then(function (result) {
                         res.render("emptyInputModal", {
-                            posts: result[0] || [],
-                            users: result[1] || [],
-                            groups: result[2] || []
+                            posts: result[0] || []
                         });
                     });
                 }
-            // Promise.all([
-            //     db.Post.create({
-            //         groupLimit: newPost.groupLimit,
-            //         body: newPost.body
-            //     })
-            // ]).then(function (result) {
-            //     res.redirect('/');
-            // }).catch(function (e) {
-            //     console.log(e);
-            // });
+
         }
     });
 
@@ -184,7 +173,7 @@ module.exports = function (app) {
         });
     });
     app.post('/post/join', function (req, res) {
-
+        //if user is not logged in, serve modal
         if(loginBool.loggedIn===false){
             Promise.all([
                     db.Post.findAll({}),
@@ -198,34 +187,15 @@ module.exports = function (app) {
                     });
                 });
         }
-
+        //if user is logged in
         else {
 
+            //get the info of the current user and the post he/she just selected
             var currentUser = req.user._json.email;
-
             var selectPostId = req.body.postId;
             var selectGroupLimit = req.body.groupLimit;
 
-            db.UserPost.findAll({
-                where: {
-                    postId: selectPostId
-                }
-            }).then(function (result) {
-
-                if (result.length >= selectGroupLimit) {
-                    Promise.all([
-                        db.Post.findAll({}),
-                        db.User.findAll({}),
-                        db.UserPost.findAll({})
-                    ]).then(function (result) {
-                        res.render("groupIsFull", {
-                            posts: result[0] || [],
-                            users: result[1] || [],
-                            groups: result[2] || []
-                        });
-                    });
-                } else {
-                    console.log("selectPost: " + selectPostId);
+                 // console.log("selectPost: " + selectPostId);
                     Promise.all([
                         db.Post.find({
                             where: {
@@ -241,15 +211,16 @@ module.exports = function (app) {
                         // console.log("RESULT: " + JSON.stringify(result[1]['id']));
                         db.UserPost.findOrCreate({
                             where: {
-                                userEmail: result[1]['email'],
+                                userEmail: currentUser,
                                 UserId: result[1]['id'],
                                 PostId: selectPostId
                         }, defaults: {
-                                userEmail: result[1]['email'],
+                                userEmail: currentUser,
                                 UserId: result[1]['id'],
                                 PostId: selectPostId
                         }})
                         .then(function (result) {
+                            
                             db.UserPost.findAll({
                                 where: {
                                     postId: selectPostId
@@ -296,23 +267,44 @@ module.exports = function (app) {
                                }
 
                                else{
-                                    Promise.all([
-                                        db.Post.findAll({}),
-                                        db.User.findAll({}),
-                                        db.UserPost.findAll({})
-                                    ]).then(function (result) {
-                                        var posts = result[0];
-                                        var users = result[1];
-                                        var groups = result[2];
-                                        res.render("cantJoinModal", {
-                                            posts: posts,
-                                            users: users,
-                                            groups: groups,
-                                            user: req.user
+
+                                    var userAlreadyJoinBool=false;
+
+                                    for (var i = 0; i < result.length; i++) {
+                                        if(result[i]['userEmail'] == currentUser){
+                                           userAlreadyJoinBool=true; 
+                                        }
+                                    }
+
+                                    if(userAlreadyJoinBool === true){
+
+                                        Promise.all([
+                                            db.Post.findAll({}),
+                                        ]).then(function (result) {
+                                            var posts = result[0];
+                                            res.render("cantJoinModal", {
+                                                posts: posts,
+                                                user: req.user
+                                            });
+                                        }).catch(function (e) {
+                                            console.log(e);
                                         });
-                                    }).catch(function (e) {
-                                        console.log(e);
-                                    });
+
+                                    } else{
+
+                                        Promise.all([
+                                            db.Post.findAll({}),
+                                        ]).then(function (result) {
+                                            var posts = result[0];
+                                            res.render("JoinModal", {
+                                                posts: posts,
+                                                user: req.user
+                                            });
+                                        }).catch(function (e) {
+                                            console.log(e);
+                                        });
+
+                                    }
                                }
 
                             });
@@ -322,36 +314,8 @@ module.exports = function (app) {
                             console.log(err);
                         });
                     });
-                }
-            });
         }
-        // var newGroup = req.body;
-        // var selectPost = req.params.id;
-        // console.log("selectPost: " + selectPost);
-        // db.Post.find({
-        //     where: {
-        //         id: selectPost
-        //     }
-        // }).then(function (result) {
-        //     db.UserPost.create({
-        //         UserId: 3,
-        //         PostId: selectPost
-        //     }).then(function (result) {
-        //         res.redirect('/');
-        //     }).catch(function (err) {
-        //         console.log(err);
-        //     });
-        // });
+
     });
-    // app.get('/', function (req, res) {
-    //     // Makes sure something is inputed
-    //     db.UserPost.findAll({
-    //         where: {
-    //             postId: 1
-    //         }
-    //     }).then(function (result) {
-    //         return res.json(result);
-    //     }
-    //     });
-    // });
+
 };
