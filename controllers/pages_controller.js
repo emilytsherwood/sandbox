@@ -5,12 +5,8 @@
  module.exports = function (app) {
      app.get('/past', function (req, res) {
          db.Post.findAll({}).then(function (result) {
-             var timeStamp = result[0].createdAt;
-             var cutTimeStamp = timeStamp.Substring(0, 16);
-             var createdAt = posts.createdAt;
              res.render('pastProjects', {
-                 posts: result,
-                 createdAt: cutTimeStamp
+                posts: result
              });
          });
      });
@@ -24,13 +20,13 @@
              // res.render('/terms');
          });
      });
-     app.get('/privacy', function (req, res) {
-         db.User.findAll({}).then(function (result) {
-             var users = result[0];
-             res.render("privacy", {
-                 users: users,
-                 user: req.user
+    app.get('/privacy', function (req, res) {
+             db.User.findAll({}).then(function (result) {
+                 var users = result[0];
+                 res.render("privacy", {
+                     users: users,
+                     user: req.user
+                 });
              });
          });
-     });
  };
