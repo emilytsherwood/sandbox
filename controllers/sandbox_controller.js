@@ -112,7 +112,7 @@ module.exports = function (app) {
     //this route is used to join an idea from any user online
     app.post('/post/join', function (req, res) {
         //if user is not logged in, stop and serve modal
-        if(loginBool.loggedIn == false){
+        if(loginBool.loggedIn == false || undefined || null){
             Promise.all([
                     db.Post.findAll({}),
                     db.User.findAll({}),
