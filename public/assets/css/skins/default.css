@@ -3,11 +3,11 @@
 a, a:hover,a:focus,a:active, footer a.text-link:hover, strike, .post-meta span a:hover, footer a.text-link, 
 ul.meta-post li a:hover, ul.cat li a:hover, ul.recent li h6 a:hover, ul.portfolio-categ li.active a, ul.portfolio-categ li.active a:hover, ul.portfolio-categ li a:hover,ul.related-post li h4 a:hover, span.highlight,article .post-heading h3 a:hover,
 .navbar .nav > .active > a,.navbar .nav > .active > a:hover,.navbar .nav > li > a:hover,.navbar .nav > li > a:focus,.navbar .nav > .active > a:focus  { 
-	color:#FF6699;
+	color:#E792B5;
 }
 
 .navbar-brand span{
-    color: #FF6699;
+    color: #E792B5;
 }
 
 header .nav li a:hover,
@@ -18,22 +18,22 @@ header .nav li a.dropdown-toggle:hover,
 header .nav li a.dropdown-toggle:focus,
 header .nav li.active ul.dropdown-menu li a:hover,
 header .nav li.active ul.dropdown-menu li.active a{
-	color:#FF6699;
+	color:#E792B5;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-	color:#FF6699;
+	color:#E792B5;
 }
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-	color:#FF6699;
+	color:#E792B5;
 }	
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {
-	color:#FF6699;
+	color:#E792B5;
 }
 /* === background color === */
 
@@ -49,7 +49,7 @@ header .nav li.active ul.dropdown-menu li.active a{
 .pagination ul > .active > span,
 .flex-control-nav li a:hover, 
 .flex-control-nav li a.active {
-  background-color: #FF6699;
+  background-color: #E792B5;
 }
 
 
@@ -111,18 +111,18 @@ ul.clients li:hover {
 
 /* box */
 .box-bottom {
-	background:#FF6699;
+	background:#E792B5;
 }
 
 /* buttons */
 .btn-dark:hover,.btn-dark:focus,.btn-dark:active  {
-  background: #FF6699;
-  border:1px solid #FF6699;
+  background: #E792B5;
+  border:1px solid #E792B5;
 }
 
 .btn-theme {
-  border:1px solid #FF6699;
-  background: #FF6699;
+  border:1px solid #E792B5;
+  background: #E792B5;
 }
 
 /* modal styled */
