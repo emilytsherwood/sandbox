@@ -7,8 +7,8 @@ const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'jkbuoyant@gmail.com',
-        pass: 'ayew4ssupBruh!'
+        user: 'sandboxteam321@gmail.com',
+        pass: 'sandboxfordevs'
     }
 });
 
@@ -239,8 +239,8 @@ module.exports = function (app) {
 
                                     // setup email data with unicode symbols
                                     let mailOptions = {
-                                        from: '"SandBox Team 👻" <jkbuoyant@gmail.com>', // sender address
-                                        to: 'joshuakim2018@u.northwestern.edu', // list of receivers
+                                        from: '"SandBox Team 👻" <sandboxteam321@gmail.com>', // sender address
+                                        to: listOfEmails, // list of receivers
                                         subject: 'SANDBOX COLLOBORATION!', // Subject line
                                         text: 'Hi! Let\'s work together!', // plain text body
                                         html: '<b>Hi! Let\'s work together!</b>' // html body
