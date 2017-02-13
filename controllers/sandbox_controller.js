@@ -199,9 +199,9 @@ module.exports = function (app) {
 
                                         // setup email data with unicode symbols
                                         let mailOptions = {
-                                            from: '"SandBox Team 👻" <jkbuoyant@gmail.com>', // sender address
+                                            from: '"SandBox Team 👻" <sandboxteam321@gmail.com>', // sender address
                                             to: listOfEmails, // list of receivers
-                                            subject: 'SANDBOX COLLOBORATION!', // Subject line
+                                            subject: 'SANDBOX COLLABORATION!', // Subject line
                                             text: 'Hi! Let\'s work together!', // plain text body
                                             html: '<b>Hi! Let\'s work together!</b>' // html body
                                         };
@@ -236,7 +236,7 @@ module.exports = function (app) {
                                }
 
                                else{
-                                
+
                                     Promise.all([
                                             db.Post.findAll({}),
                                         ]).then(function (result) {
