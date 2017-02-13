@@ -86,7 +86,7 @@ ul {
 
 .container {
 	padding:0 20px 0 20px;
-	position:relative;
+	position:relative; 
 }
 
 #wrapper{
@@ -778,6 +778,9 @@ ul.portfolio-categ li.active a:hover, ul.portfolio-categ li a:hover,ul.portfolio
 /* ===============================
 13. Elements
 ================================ */
+#postBox{
+	border-width: 5px;
+}
 
 /* --- blockquote --- */
 blockquote {

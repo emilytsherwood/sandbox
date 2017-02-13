@@ -173,7 +173,7 @@ module.exports = function (app) {
                                 }
                             })
                         ]).then(function (result) {
-
+                            // after UserPost is created, check if group limit is met
                             db.UserPost.create({
                                 userEmail: currentUser,
                                 UserId: result[0]['id'],
@@ -185,7 +185,7 @@ module.exports = function (app) {
                                     postId: selectPostId
                                 }
                             }).then(function (result) {
-
+                                    // if group limit is met, send to past projects and send everyone email
                                    if (result.length == selectGroupLimit) {
 
                                     var listOfEmails="";
@@ -220,10 +220,6 @@ module.exports = function (app) {
                                                 id: selectPostId
                                                 }
                                         });
-                                        // .then(function(result){
-                                        //     res.render("joinModal");
-                                            
-                                        // });
 
                                     Promise.all([
                                         db.Post.findAll({}),
@@ -238,7 +234,7 @@ module.exports = function (app) {
                                     });   
 
                                }
-
+                               // if group limit is not met, notify user that he has joined successfully
                                else{
 
                                     Promise.all([
