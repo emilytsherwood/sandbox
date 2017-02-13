@@ -3,15 +3,7 @@ var db = require("../models");
 // Export these awesome routes
 var passport = require('passport');
 
-module.exports = {
-  //made this into an object that exports login status within the app.  Didn't know passport did it for you.
-  loggedIn: false,
-  routes: function (app) {
-
-    app.get('/login', function(req, res){
-      res.render('login', { user: req.user });
-    });
-
+module.exports = function (app) {
 
     app.get('/account', ensureAuthenticated, function(req, res){
       res.render('account', { user: req.user, email: req.user.emails[0].value});
@@ -77,6 +69,5 @@ module.exports = {
       res.redirect('/');
     }
 
-  }
 };
 

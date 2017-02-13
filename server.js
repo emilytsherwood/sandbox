@@ -83,7 +83,7 @@ app.set("view engine", "handlebars");
 //importing routes
 var sandboxRoutes = require("./controllers/sandbox_controller.js")(app);
 
-var loginRoutes = require("./controllers/login_controller.js").routes(app);
+var loginRoutes = require("./controllers/login_controller.js")(app);
 
 var pageRoutes = require("./controllers/pages_controller.js")(app);
 
