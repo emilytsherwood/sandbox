@@ -229,7 +229,7 @@ module.exports = function (app) {
                                         db.Post.findAll({}),
                                     ]).then(function (result) {
                                         var posts = result[0];
-                                        res.render("joinModal", {
+                                        res.render("joinAndEmailModal", {
                                             posts: posts,
                                             user: req.user
                                         });
@@ -245,7 +245,7 @@ module.exports = function (app) {
                                             db.Post.findAll({}),
                                         ]).then(function (result) {
                                             var posts = result[0];
-                                            res.render("joinAndEmailModal", {
+                                            res.render("joinModal", {
                                                 posts: posts,
                                                 user: req.user
                                             });
