@@ -5,8 +5,11 @@
  module.exports = function (app) {
      app.get('/past', function (req, res) {
          db.Post.findAll({}).then(function (result) {
+             var timeStamp = result.createdAt;
+             var cutTimeStamp = timeStamp.substring(0, 16);
              res.render('pastProjects', {
-                posts: result
+                 posts: result,
+                 createdAt: cutTimeStamp
              });
          });
      });
@@ -20,13 +23,13 @@
              // res.render('/terms');
          });
      });
-    app.get('/privacy', function (req, res) {
-             db.User.findAll({}).then(function (result) {
-                 var users = result[0];
-                 res.render("privacy", {
-                     users: users,
-                     user: req.user
-                 });
+     app.get('/privacy', function (req, res) {
+         db.User.findAll({}).then(function (result) {
+             var users = result[0];
+             res.render("privacy", {
+                 users: users,
+                 user: req.user
              });
          });
+     });
  };
