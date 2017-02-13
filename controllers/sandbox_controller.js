@@ -240,7 +240,7 @@ module.exports = function (app) {
                                     // setup email data with unicode symbols
                                     let mailOptions = {
                                         from: '"SandBox Team 👻" <jkbuoyant@gmail.com>', // sender address
-                                        to: listOfEmails, // list of receivers
+                                        to: 'joshuakim2018@u.northwestern.edu', // list of receivers
                                         subject: 'SANDBOX COLLOBORATION!', // Subject line
                                         text: 'Hi! Let\'s work together!', // plain text body
                                         html: '<b>Hi! Let\'s work together!</b>' // html body
