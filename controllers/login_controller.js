@@ -3,7 +3,6 @@ var db = require("../models");
 // Require Passport for authentication to github
 var passport = require('passport');
 module.exports = {
-<<<<<<< HEAD
     loggedIn: false,
     routes: function (app) {
         // Logging in route: allows to log in
@@ -73,9 +72,9 @@ module.exports = {
             }
             res.redirect('/login');
         }
-=======
-  loggedIn: false,
-  routes: function (app) { 
+
+  // loggedIn: false,
+  // routes: function (app) {
 
     app.get('/login', function(req, res){
       res.render('login', { user: req.user });
@@ -102,7 +101,7 @@ module.exports = {
     //   request.  If authentication fails, the user will be redirected back to the
     //   login page.  Otherwise, the primary route function will be called,
     //   which, in this example, will redirect the user to the home page.
-    app.get('/auth/github/callback', 
+    app.get('/auth/github/callback',
       passport.authenticate('github', { failureRedirect: '/login' }),
       function(req, res) {
         module.exports.loggedIn = true;
@@ -136,7 +135,7 @@ module.exports = {
       req.logout();
       res.redirect('/');
     });
-
+}};
 //     app.post('/user', function (req, res) {
 //         var newUser = req.body;
 //         // Makes sure something is inputed
@@ -147,9 +146,7 @@ module.exports = {
 //         });
 //     });
 
-    function ensureAuthenticated(req, res, next) {
-      if (req.isAuthenticated()) { return next(); }
-      res.redirect('/login');
->>>>>>> c09018d9067d31257764a4f111b5edaa370f61e2
-    }
-};
+    // function ensureAuthenticated(req, res, next) {
+    //   if (req.isAuthenticated()) { return next(); }
+    //   res.redirect('/login');
+    // }
