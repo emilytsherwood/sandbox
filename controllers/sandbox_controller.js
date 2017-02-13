@@ -53,7 +53,7 @@ module.exports = function (app) {
                         posts: result[0] || []
                     });
                 });
-        //if logged in        
+        //if logged in
         } else {
 
             var newPost = req.body;
@@ -63,7 +63,7 @@ module.exports = function (app) {
 
                 //store the current users email
                 var currentUser = req.user._json.email;
-                
+
                 //get the entire user object from the database
                 Promise.all([
                         db.User.find({
@@ -139,13 +139,13 @@ module.exports = function (app) {
                         postId: selectPostId
                     }
                 }).then(function (result) {
-                    
+
                     //then check to see if the current user already joined this group
                     var userAlreadyJoinBool=false;
 
                     for (var i = 0; i < result.length; i++) {
                         if(result[i]['userEmail'] === currentUser){
-                        userAlreadyJoinBool=true; 
+                        userAlreadyJoinBool=true;
                         }
                     }
 
@@ -163,7 +163,7 @@ module.exports = function (app) {
                         }).catch(function (e) {
                             console.log(e);
                         });
-                                      
+
                     //if the user has not joined then create UserPost entry with the user and post info
                     } else{
                         Promise.all([
@@ -177,7 +177,7 @@ module.exports = function (app) {
                             db.UserPost.create({
                                 userEmail: currentUser,
                                 UserId: result[0]['id'],
-                                PostId: selectPostId                
+                                PostId: selectPostId
                             }).then(function (result) {
 
                                 db.UserPost.findAll({
@@ -195,15 +195,15 @@ module.exports = function (app) {
                                         listOfEmails = listOfEmails.concat(recipient);
                                     }
 
-                                    listOfEmails = listOfEmails.slice(0, (listOfEmails.length - 2))
+                                    listOfEmails = listOfEmails.slice(0, (listOfEmails.length - 2));
 
                                         // setup email data with unicode symbols
-                                        let mailOptions = {
+                                        var mailOptions = {
                                             from: '"SandBox Team 👻" <sandboxteam321@gmail.com>', // sender address
                                             to: listOfEmails, // list of receivers
                                             subject: 'SANDBOX COLLABORATION!', // Subject line
                                             text: 'Hi! Let\'s work together!', // plain text body
-                                            html: '<b>Hi! Let\'s work together!</b>' // html body
+                                            html: '<b>Hi! Let\'s work together!</b><p>This is an official email from Sandbox Dev!</p><p>Your group topic is: </p>' + '"'+req.body.email+'"'
                                         };
 
                                         transporter.sendMail(mailOptions, (error, info) => {
@@ -215,7 +215,7 @@ module.exports = function (app) {
 
                                         db.Post.update({
                                                 capacity: true
-                                            }, {                                     
+                                            }, {
                                                 where: {
                                                 id: selectPostId
                                                 }
@@ -231,7 +231,7 @@ module.exports = function (app) {
                                         });
                                     }).catch(function (e) {
                                         console.log(e);
-                                    });   
+                                    });
 
                                }
                                // if group limit is not met, notify user that he has joined successfully
