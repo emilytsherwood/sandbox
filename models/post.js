@@ -36,6 +36,10 @@ module.exports = function (sequelize, DataTypes) {
                 len: [2]
             }
         },
+        authorId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         createdAt: {
             type: DataTypes.DATE,
             allowNull: false,
